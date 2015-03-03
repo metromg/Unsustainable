@@ -1,0 +1,2 @@
+#Script for adding cordova plugins
+cordova add plugin

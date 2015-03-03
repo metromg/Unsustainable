@@ -1,0 +1,7 @@
+#!/bin/bash
+#Rebuild app script
+osascript ./stop.scpt
+cordova build
+osascript ./run.scpt
+sleep 10
+osascript ./webinspector.scpt

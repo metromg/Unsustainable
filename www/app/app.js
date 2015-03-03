@@ -4,12 +4,16 @@
 'use strict';
 define([
     'angular',
-    'angularRoute'
-], function(angular, angularRoute) {
-
-    return angular.module('app', [
-        'ngRoute'
-    ]).config(['$routeProvider', function($routeProvider) {
-            $routeProvider.otherwise({redirectTo: '/'});
+    'angularRoute',
+    'controls'
+], function(angular) {
+    return angular.module('app', ['ngRoute','controls']
+    ).config(['$routeProvider', function($routeProvider) {
+            $routeProvider
+                .when('/', {
+                    templateUrl: 'pages/homePage.html',
+                    controller: 'MainCtrl'
+                })
+                .otherwise({redirectTo: '/'});
         }]);
 });

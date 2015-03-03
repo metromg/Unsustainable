@@ -18,7 +18,7 @@ module.exports = function (config) {
             {pattern: 'www/libs/angular/angular.js', included: false},
             {pattern: 'www/libs/angular-route/angular-route.js', included: false},
             {pattern: 'www/libs/angular-mocks/angular-mocks.js', included: false},
-            {pattern: 'www/app/app.js', included: false},
+            {pattern: 'www/app/*.js', included: false},
             {pattern: 'www/tests/*Spec.js', included: false},
             // needs to be last http://karma-runner.github.io/0.12/plus/requirejs.html
             'www/require-config.js'

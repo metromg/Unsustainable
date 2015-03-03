@@ -21,6 +21,10 @@ if(window.__karma__) {
 require.config({
     paths: {
         app:'app/app',
+        controls:'app/controls',
+        directive:'',
+        service:'',
+
         angular: 'libs/angular/angular',
         angularRoute: 'libs/angular-route/angular-route',
         angularMocks: 'libs/angular-mocks/angular-mocks',
@@ -29,7 +33,7 @@ require.config({
     shim: {
         'angular' : {'exports' : 'angular'},
         'angularRoute': ['angular'],
-        'app' :{'deps': ['angular']},
+        'app' :{'deps': ['angular','controls']},
         'angularMocks': {
             deps:['angular'],
             'exports':'angular.mock'
@@ -47,6 +51,8 @@ require([
         'angular',
         'app'
     ], function(angular, app) {
-             angular.bootstrap(document, ['app']);
+
+        angular.bootstrap(document, ['app']);
+
     }
 );

@@ -3,3 +3,6 @@
 *.~vsdx
 ~$*
 *.bak
+hooks/*
+platforms/*
+plugins/*

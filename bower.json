@@ -8,8 +8,11 @@
     "angular-ui-router": "latest",
     "angular-animate": "latest",
     "mobile-angular-ui": "latest",
+    "angular-loader": "latest",
     "angular-mocks":"latest",
     "ngCordova":"latest",
-    "ng-cordova-mocks":"latest"
+    "ng-cordova-mocks":"latest",
+    "requirejs-text": "latest",
+    "requirejs": "latest"
   }
 }

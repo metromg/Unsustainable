@@ -8,4 +8,4 @@ platforms/*
 plugins/*
 .idea/*
 www/libs/*
-
+node_modules/*

@@ -2,13 +2,15 @@
 
 if(window.__karma__) {
     var allTestFiles = [];
-    var TEST_REGEXP = /spec\.js$/;
+    var TEST_REGEXP = /.*Spec\.js$/;
 
     var pathToModule = function(path) {
-        return path.replace(/^\/base\/app\//, '').replace(/\.js$/, '');
+
+        return path.replace(/^\/base\/www\//, '').replace(/\.js$/, '');
     };
 
     Object.keys(window.__karma__.files).forEach(function(file) {
+
         if (TEST_REGEXP.test(file)) {
             // Normalize paths to RequireJS module names.
             allTestFiles.push(pathToModule(file));
@@ -18,6 +20,7 @@ if(window.__karma__) {
 
 require.config({
     paths: {
+        app:'app/app',
         angular: 'libs/angular/angular',
         angularRoute: 'libs/angular-route/angular-route',
         angularMocks: 'libs/angular-mocks/angular-mocks',
@@ -26,6 +29,7 @@ require.config({
     shim: {
         'angular' : {'exports' : 'angular'},
         'angularRoute': ['angular'],
+        'app' :{'deps': ['angular']},
         'angularMocks': {
             deps:['angular'],
             'exports':'angular.mock'
@@ -36,17 +40,13 @@ require.config({
     ],
     deps: window.__karma__ ? allTestFiles : [],
     callback: window.__karma__ ? window.__karma__.start : null,
-    baseUrl: window.__karma__ ? '/base/app' : '',
+    baseUrl: window.__karma__ ? '/base/www' : ''
 });
 
 require([
         'angular',
         'app'
     ], function(angular, app) {
-        var $html = angular.element(document.getElementsByTagName('html')[0]);
-        angular.element().ready(function() {
-            // bootstrap the app manually
-            angular.bootstrap(document, ['myApp']);
-        });
+             angular.bootstrap(document, ['app']);
     }
 );

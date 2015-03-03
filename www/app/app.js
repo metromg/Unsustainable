@@ -6,6 +6,7 @@ define([
     'angular',
     'angularRoute'
 ], function(angular, angularRoute) {
+
     return angular.module('app', [
         'ngRoute'
     ]).config(['$routeProvider', function($routeProvider) {

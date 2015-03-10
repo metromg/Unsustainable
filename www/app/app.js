@@ -1,19 +1,23 @@
 /**
  * Created by elias on 03.03.15.
  */
-'use strict';
 define([
     'angular',
-    'angularRoute',
-    'controls'
-], function(angular) {
-    return angular.module('app', ['ngRoute','controls']
-    ).config(['$routeProvider', function($routeProvider) {
-            $routeProvider
-                .when('/', {
-                    templateUrl: 'pages/homePage.html',
-                    controller: 'MainCtrl'
-                })
-                .otherwise({redirectTo: '/'});
-        }]);
+    'unsustainableControls',
+    'unsustainableDirectives',
+    'angularUiRouter'
+], function (angular) {
+    'use strict';
+    var app = angular.module('unsustainableApp', ['ui.router','unsustainableControls','unsustainableDirectives']);
+    app.config(['$stateProvider', function ($stateProvider) {
+
+        $stateProvider.state('alchemyTable', {
+            controller: 'alchemyTableCtrl',
+            templateUrl: 'pages/alchemy-table.html'
+        });
+    }]);
+    app.run(['$state', function ($state) {
+        $state.go('alchemyTable');
+    }]);
+    return app;
 });

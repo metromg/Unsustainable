@@ -20,20 +20,19 @@ if(window.__karma__) {
 
 require.config({
     paths: {
-        app:'app/app',
-        controls:'app/controls',
-        directive:'',
+        unsustainableApp:'app/app',
+        unsustainableControls:'app/unsustainable-controls',
+        unsustainableDirectives:'app/unsustainable-directives',
         service:'',
 
         angular: 'libs/angular/angular',
-        angularRoute: 'libs/angular-route/angular-route',
+        angularUiRouter: 'libs/angular-ui-router/release/angular-ui-router',
         angularMocks: 'libs/angular-mocks/angular-mocks',
         text: 'libs/requirejs-text/text'
     },
     shim: {
         'angular' : {'exports' : 'angular'},
-        'angularRoute': ['angular'],
-        'app' :{'deps': ['angular','controls']},
+        'angularUiRouter': ['angular'],
         'angularMocks': {
             deps:['angular'],
             'exports':'angular.mock'
@@ -49,10 +48,10 @@ require.config({
 
 require([
         'angular',
-        'app'
-    ], function(angular, app) {
+        'unsustainableApp'
+    ], function(angular) {
 
-        angular.bootstrap(document, ['app']);
+        angular.bootstrap(document, ['unsustainableApp']);
 
     }
 );

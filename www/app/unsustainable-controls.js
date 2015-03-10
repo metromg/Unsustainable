@@ -4,9 +4,8 @@ define(['angular'], function (ng) {
     //http://chawi3.com/2015/02/17/error-ngareq-argument-fn-is-not-a-function-got-string/
 
     ctrl.controller('alchemyTableCtrl', ['$scope', function ($scope){
-        var vm = $scope.vm = this;
-        vm.title = "Wow it Works!";
 
+        $scope.position = {x:100,y:100}
     }]);
 
     return ctrl;

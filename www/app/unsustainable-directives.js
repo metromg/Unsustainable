@@ -7,12 +7,14 @@ define(['angular'], function (ng) {
 
     mdl.directive('unsustainableElement', [ function () {
         var directive = {};
-        directive.template = "<div>I'm a {{elementName}}</div>";
+        directive.templateUrl = "directive-assets/unsustainable-element.html";
 
         directive.replace = true;
         directive.restrict = 'E';
         directive.scope = {
-            elementName:'='
+            elementName:'=',
+            position : '='
+
         };
         directive.link = function (scope, element, attributes) {
 

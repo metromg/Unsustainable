@@ -27,7 +27,7 @@ build/Release
 node_modules
 bower_components
 # Build files
-build
+www
 templates.js
 #webstorm
 .idea

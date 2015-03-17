@@ -15,17 +15,16 @@ function unsustainableElement() {
         position: '='
     };
     directive.link = function (scope, element, attributes) {
-        angular.element(element).attr("draggable", "true");
         var mouseDown = false;
 
         element.bind("touchstart", onTouchStart);
         element.bind("mousedown", onTouchStart);
 
         angular.element(document.body).bind("touchmove", onTouchMove);
-        angular.element(document.body).bind("mousemove", onTouchMove);
+        angular.element(document.body).bind("mousemove", onMouseMove);
 
-        angular.element(document.body).bind("touchend", onTouchEnd);
-        angular.element(document.body).bind("mouseup", onTouchEnd);
+        element.bind("touchend", onTouchEnd);
+        element.bind("mouseup", onTouchEnd);
 
         function onTouchStart(e) {
             console.log('dragstart');
@@ -37,11 +36,22 @@ function unsustainableElement() {
             mouseDown = false;
         }
 
+        function onMouseMove(e) {
+            if (!mouseDown) return;
+
+            scope.$apply(function () {
+                scope.position.x = e.clientX - element[0].clientWidth / 2;
+                scope.position.y = e.clientY - element[0].clientHeight / 2;
+            });
+        }
+
         function onTouchMove(e) {
             if (!mouseDown) return;
 
-            scope.position.x = e.clientX;
-            scope.position.y = e.clientY;
+            scope.$apply(function () {
+                scope.position.x = e.touches[0].clientX - element[0].clientWidth / 2;
+                scope.position.y = e.touches[0].clientY - element[0].clientWidth / 2;
+            });
         }
     };
     return directive;

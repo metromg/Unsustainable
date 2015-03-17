@@ -7,4 +7,7 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="Orientation" value="landscape" />
+    <preference name="Fullscreen" value="true" />
 </widget>

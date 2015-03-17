@@ -2,17 +2,7 @@
   "name": "Unsustainable",
   "version": "1.0.0",
   "dependencies": {
-    "angular": "latest",
-    "angular-route": "latest",
-    "angular-touch": "latest",
-    "angular-ui-router": "latest",
-    "angular-animate": "latest",
-    "mobile-angular-ui": "latest",
-    "angular-loader": "latest",
-    "angular-mocks":"latest",
     "ngCordova":"latest",
-    "ng-cordova-mocks":"latest",
-    "requirejs-text": "latest",
-    "requirejs": "latest"
+    "ng-cordova-mocks":"latest"
   }
 }

@@ -1,17 +1,31 @@
 {
-  "name": "Unsustainable",
-  "private": true,
-  "version": "1.0.0",
-  "description": "Unsustainable",
-  "repository": "https://github.com/zyborgLP/Unsustainable",
-  "license": "MIT",
-  "author": "Michael Günter",
+  "name": "angularjs-gulp-browserify-boilerplate",
+  "version": "0.1.0",
+  "author": "Jake Marsh <jakemmarsh@gmail.com>",
   "contributors": [
     {
-      "name": "Elias Schmidhalter",
-      "url": "https://github.com/calesanz/"
+      "name": "Solomon Hawk",
+      "email": "solomon.hawk@viget.com",
+      "url": "http://www.solomohawk.com/"
     }
   ],
+  "description": "Boilerplate using AngularJS, SASS, Gulp, and Browserify while also utilizing best practices.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jakemmarsh/angularjs-gulp-browserify-boilerplate.git"
+  },
+  "keywords": [
+    "express",
+    "gulp",
+    "browserify",
+    "angular",
+    "sass",
+    "karma",
+    "jasmine",
+    "protractor",
+    "boilerplate"
+  ],
+  "private": true,
   "engines": {
     "node": ">=0.12.x"
   },
@@ -79,11 +93,6 @@
     "pretest": "npm install",
     "test": "karma start test/karma.conf.js",
     "preprotractor": "npm run update-webdriver",
-    "protractor": "npm run protractor test/protractor.conf.js",
-    "install": "napa"
+    "protractor": "npm run protractor test/protractor.conf.js"
   }
-  , "napa": {
-  "angular": "angular/bower-angular",
-  "angular-route": "angular/bower-angular-route"
-}
 }

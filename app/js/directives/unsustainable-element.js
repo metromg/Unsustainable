@@ -18,31 +18,36 @@ function unsustainableElement() {
         angular.element(element).attr("draggable", "true");
         var mouseDown = false;
 
-        element.bind("mousedown", function (e) {
+        element.bind("touchstart", onTouchStart);
+        element.bind("mousedown", onTouchStart);
+
+        angular.element(document.body).bind("touchmove", onTouchMove);
+        angular.element(document.body).bind("mousemove", onTouchMove);
+
+        angular.element(document.body).bind("touchend", onTouchEnd);
+        angular.element(document.body).bind("mouseup", onTouchEnd);
+
+        function onTouchStart(e) {
             console.log('dragstart');
             mouseDown = true;
-        });
-        angular.element(document.body).bind("mousemove", function (e) {
+        }
 
-            if (!mouseDown) return;
-            scope.$apply(function () {
-                scope.position.x = e.clientX;
-                scope.position.y = e.clientY;
-            });
-
-
-        });
-
-
-        angular.element(document.body).bind("mouseup", function (e) {
+        function onTouchEnd(e) {
             console.log('dragend');
             mouseDown = false;
-        });
+        }
 
+        function onTouchMove(e) {
+            if (!mouseDown) return;
+
+            scope.position.x = e.clientX;
+            scope.position.y = e.clientY;
+        }
     };
     return directive;
 
-};
+
+}
 
 directivesModule.directive('unsustainableElement', unsustainableElement);
 

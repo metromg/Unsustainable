@@ -1,4 +1,5 @@
 #!/bin/bash
+gulp prod
 #Rebuild app script
 osascript ./stop.scpt
 cordova build

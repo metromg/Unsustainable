@@ -11,8 +11,7 @@ function unsustainableElement() {
     directive.replace = true;
     directive.restrict = 'E';
     directive.scope = {
-        elementName: '=',
-        position: '='
+        elementData: '='
     };
     directive.link = function (scope, element, attributes) {
         var mouseDown = false;
@@ -32,16 +31,19 @@ function unsustainableElement() {
         }
 
         function onTouchEnd(e) {
-            console.log('dragend');
+
             mouseDown = false;
+
+            scope.$emit("UNS-ELM-DROPPED",scope.elementData);
+
         }
 
         function onMouseMove(e) {
             if (!mouseDown) return;
 
             scope.$apply(function () {
-                scope.position.x = e.clientX - element[0].clientWidth / 2;
-                scope.position.y = e.clientY - element[0].clientHeight / 2;
+                scope.elementData.position.x = e.clientX - element[0].clientWidth / 2;
+                scope.elementData.position.y = e.clientY - element[0].clientHeight / 2;
             });
         }
 
@@ -49,8 +51,8 @@ function unsustainableElement() {
             if (!mouseDown) return;
 
             scope.$apply(function () {
-                scope.position.x = e.touches[0].clientX - element[0].clientWidth / 2;
-                scope.position.y = e.touches[0].clientY - element[0].clientWidth / 2;
+                scope.elementData.position.x = e.touches[0].clientX - element[0].clientWidth / 2;
+                scope.elementData.position.y = e.touches[0].clientY - element[0].clientWidth / 2;
             });
         }
     };

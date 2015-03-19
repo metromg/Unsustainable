@@ -41,12 +41,12 @@ module.exports = function(config) {
       // 3rd-party resources
       'node_modules/angular/angular.min.js',
       'node_modules/angular-mocks/angular-mocks.js',
-
+        // test files
+        'test/unit/**/*.js',
       // app-specific code
-      'app/js/main.js',
+      'app/js/main.js'
 
-      // test files
-      'test/unit/**/*.js'
+
     ]
 
   });

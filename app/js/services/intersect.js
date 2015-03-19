@@ -5,7 +5,7 @@ var servicesModule = require('./_index.js');
 /**
  * @ngInject
  */
-function IntersectService($q, $timeout) {
+servicesModule.service('intersectService',function ($q, $timeout) {
 
     var service = {};
 
@@ -31,17 +31,20 @@ function IntersectService($q, $timeout) {
 
     service.checkIntersection = function (position1, position2, tolerance) {
 
-        if (position1.x + tolerance >= position2.x && position1.x <= position2.x)
-            return true;
-        if (position1.y + tolerance >= position2.y && position1.y <= position2.y)
-            return true;
+        if ((position1.x > (position2.x + tolerance)) || ((position1.x + tolerance) < position2.x)) {
 
+            return false;
+        }
+        if ((position1.y > (position2.y + tolerance)) || ((position1.y + tolerance) < position2.y)) {
+            return false;
+        }
+        return true;
+    };
 
-        return false;
+    service.testFunction = function () {
+        return "65431";
     };
 
     return service;
+});
 
-}
-
-servicesModule.service('IntersectService', IntersectService);

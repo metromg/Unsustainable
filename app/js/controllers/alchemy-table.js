@@ -8,19 +8,19 @@ var controllersModule = require('./_index');
  * @ngInject
  */
 function alchemyTableCtrl($scope, intersectService, elementService) {
-
     // ViewModel
     var vm = this;
     elementService.gettingAllElements().then(function (data) {
         vm.elements = data.elements;
+        vm.energy = data.energy;
     });
+
     //Combine Elements
     $scope.$on("UNS-ELM-DROPPED", function (event, element) {
         intersectService.getIntersectingElements(element, vm.elements).then(function (intersecting) {
             console.log(element.name + " intersects with " + intersecting[0].name);
 
             elementService.combineElements(element, intersecting[0]).then(function (combinedElements) {
-
                 combinedElements[0].position = element.position;
                 combinedElements[1].position = intersecting[0].position;
 
@@ -30,26 +30,26 @@ function alchemyTableCtrl($scope, intersectService, elementService) {
                 vm.elements.push(combinedElements[0]);
                 vm.elements.push(combinedElements[1]);
 
+                vm.energy -= combinedElements[0].recipes[0].energy;
             }, function (err) {
                 console.log("Well shit! That's not a valid combination.");
             })
-
         });
-
     });
+
     //Split elements
     $scope.$on("UNS-ELM-LONGTOUCH", function (event, element) {
         console.log("splitting: " + element.name);
-        elementService.splitElement(element).then(function (splittedElement) {
-            splittedElement.position = element.position;
+        elementService.splitElement(element).then(function (data) {
+            data.splittedElement.position = element.position;
             vm.elements.splice(vm.elements.indexOf(element), 1);
-            vm.elements.push(splittedElement);
+            vm.elements.push(data.splittedElement);
 
+            vm.energy -= data.energy;
         }, function (err) {
             console.log("Well shit! That's not a splittable element.");
         });
     });
-
 }
 
 controllersModule.controller('alchemyTableCtrl', alchemyTableCtrl);

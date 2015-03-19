@@ -1,4 +1,4 @@
-<div ng-style="{'position':'absolute','top':elementData.position.y+'px', 'left':elementData.position.x+'px'}" ng-class="elementClass">
+<div ng-style="{'position':'absolute','top':getPositionY() +'px', 'left':getPositionX() +'px'}" ng-class="elementClass">
     <div ng-style="{'height':3+'em', 'width':3+'em','background-color':'green','border-radius':'50%'}">
         {{elementData.name}}
     </div>

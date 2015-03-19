@@ -1,12 +1,11 @@
 <div class="uns-alchemy-nav">
-    <div class="uns-energy-bar"></div>
+    <div class="uns-energy-bar">
+        <div ng-style="{'width': (100 / 200) * vm.energy + '%'}">{{vm.energy}}</div>
+    </div>
     <div class="uns-navigation-buttons"></div>
+    <div class="clearfix"></div>
 </div>
 
 <div class="uns-alchemy-table">
-
     <unsustainable-element ng-repeat="element in vm.elements" element-data="element"></unsustainable-element>
-
 </div>
-
-

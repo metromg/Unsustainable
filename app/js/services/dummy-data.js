@@ -19,7 +19,10 @@ servicesModule.service('dummyDataService', function ($q, $timeout) {
                 elements: [
                     {'typeId': '1', 'name': 'Waterelement','position':{'x':100,'y':100}},
                     {'typeId': '2', 'name': 'Fireelement','position':{'x':200,'y':100}},
-                    {'typeId': '3', 'name': 'Airelement','position':{'x':300,'y':100}, parents: [{'typeId': 1}, {'typeId': 2}]}
+                    {'typeId': '3', 'name': 'Airelement','position':{'x':300,'y':100}, parents: [
+                        {'typeId': '1', 'name': 'Waterelement'},
+                        {'typeId': '2', 'name': 'Fireelement'}
+                    ]}
                 ]
             };
         $timeout(function () {

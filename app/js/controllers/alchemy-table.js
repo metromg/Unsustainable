@@ -7,31 +7,28 @@ var controllersModule = require('./_index');
 /**
  * @ngInject
  */
-function alchemyTableCtrl($scope,intersectService,elementService) {
+function alchemyTableCtrl($scope, intersectService, elementService) {
 
     // ViewModel
     var vm = this;
     elementService.gettingAllElements().then(function (data) {
         vm.elements = data.elements;
     });
+    //Combine Elements
+    $scope.$on("UNS-ELM-DROPPED", function (event, element) {
+        intersectService.getIntersectingElements(element, vm.elements).then(function (intersecting) {
+            console.log(element.name + " intersects with " + intersecting[0].name);
 
-    $scope.$on("UNS-ELM-DROPPED", function (event,element) {
-        intersectService.getIntersectingElements(element,vm.elements).then(function (intersecting) {
-            console.log(element.name +" intersects with " +intersecting[0].name);
+            elementService.combineElements(element, intersecting[0]).then(function (combinedElements) {
 
-            elementService.combineElements(element,intersecting[0]).then(function (combinedElement) {
-                console.log(combinedElement);
-                combinedElement.position = element.position;
+                combinedElements[0].position = element.position;
+                combinedElements[1].position = intersecting[0].position;
 
-                function Clone(){};
-                Clone.prototype=combinedElement;
-                var second  = new Clone();
-                second.position = intersecting[0].position;
-                vm.elements.splice(vm.elements.indexOf(element),1);
-                vm.elements.splice(vm.elements.indexOf(intersecting[0]),1);
+                vm.elements.splice(vm.elements.indexOf(element), 1);
+                vm.elements.splice(vm.elements.indexOf(intersecting[0]), 1);
 
-                vm.elements.push(second);
-                vm.elements.push(combinedElement);
+                vm.elements.push(combinedElements[0]);
+                vm.elements.push(combinedElements[1]);
 
             }, function (err) {
                 console.log("Well shit! That's not a valid combination.");
@@ -40,9 +37,17 @@ function alchemyTableCtrl($scope,intersectService,elementService) {
         });
 
     });
-    $scope.$on("UNS-ELM-LONGTOUCH", function (event,element) {
-        console.log("splitting: "+element.name);
+    //Split elements
+    $scope.$on("UNS-ELM-LONGTOUCH", function (event, element) {
+        console.log("splitting: " + element.name);
+        elementService.splitElement(element).then(function (splittedElement) {
+            splittedElement.position = element.position;
+            vm.elements.splice(vm.elements.indexOf(element), 1);
+            vm.elements.push(splittedElement);
 
+        }, function (err) {
+            console.log("Well shit! That's not a splittable element.");
+        });
     });
 
 }

@@ -17,9 +17,9 @@ servicesModule.service('dummyDataService', function ($q, $timeout) {
             var deferred = $q.defer();
             var dummyData = {
                 elements: [
-                    {'typeId': '1', 'name': 'Waterelement'},
-                    {'typeId': '2', 'name': 'Fireelement'},
-                    {'typeId': '3', 'name': 'Airelement', parents: [{'typeId': 1}, {'typeId': 2}]}
+                    {'typeId': '1', 'name': 'Waterelement','position':{'x':100,'y':100}},
+                    {'typeId': '2', 'name': 'Fireelement','position':{'x':200,'y':100}},
+                    {'typeId': '3', 'name': 'Airelement','position':{'x':300,'y':100}, parents: [{'typeId': 1}, {'typeId': 2}]}
                 ]
             };
         $timeout(function () {

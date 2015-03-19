@@ -8,7 +8,7 @@ var servicesModule = require('./_index.js');
 /**
  * @ngInject
  */
-servicesModule.service('combineService', function ($q, $timeout, dummyDataService) {
+servicesModule.service('elementService', function ($q, $timeout, dummyDataService) {
 
     var service = {};
 
@@ -32,6 +32,10 @@ servicesModule.service('combineService', function ($q, $timeout, dummyDataServic
 
 
         return deferred.promise;
+    };
+
+    service.gettingAllElements = function () {
+        return dummyDataService.gettingData();
     };
 
 

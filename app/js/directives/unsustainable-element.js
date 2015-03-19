@@ -15,6 +15,8 @@ function unsustainableElement() {
         touchDuration: '='
     };
     directive.link = function (scope, element, attributes) {
+        scope.elementData.position = scope.elementData.position || {'x':100,'y':100};
+
         var mouseDown = false;
         var timer;
         var touchDuration = scope.touchDuration || 1200;
@@ -25,13 +27,14 @@ function unsustainableElement() {
         angular.element(document.body).bind("touchmove", onTouchMove);
         angular.element(document.body).bind("mousemove", onMouseMove);
 
-        element.bind("touchend", onTouchEnd);
-        element.bind("mouseup", onTouchEnd);
+        angular.element(document.body).bind("touchend", onTouchEnd);
+        angular.element(document.body).bind("mouseup", onTouchEnd);
 
 
         function onTouchStart(e) {
             mouseDown = true;
             //TODO make splitting possible
+
             timer = setTimeout(onLongTouch, touchDuration);
         }
 

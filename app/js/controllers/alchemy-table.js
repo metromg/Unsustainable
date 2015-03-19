@@ -7,7 +7,7 @@ var controllersModule = require('./_index');
 /**
  * @ngInject
  */
-function alchemyTableCtrl($scope,IntersectService) {
+function alchemyTableCtrl($scope,intersectService) {
 
     // ViewModel
     var vm = this;
@@ -17,10 +17,10 @@ function alchemyTableCtrl($scope,IntersectService) {
         {'typeId':'3','name':'Airelement','position':{x:200,y:300}}
     ];
     $scope.$on("UNS-ELM-DROPPED", function (event,data) {
-        IntersectService.getIntersectingElements(data,vm.elements).then(function (intersecting) {
+        intersectService.getIntersectingElements(data,vm.elements).then(function (intersecting) {
             console.log(intersecting);
         });
-     console.log(data);
+
     });
 
 }

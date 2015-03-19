@@ -26,14 +26,11 @@ function unsustainableElement() {
         element.bind("mouseup", onTouchEnd);
 
         function onTouchStart(e) {
-            console.log('dragstart');
             mouseDown = true;
         }
 
         function onTouchEnd(e) {
-
             mouseDown = false;
-
             scope.$emit("UNS-ELM-DROPPED",scope.elementData);
 
         }

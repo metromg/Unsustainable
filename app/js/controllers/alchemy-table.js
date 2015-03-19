@@ -40,7 +40,7 @@ function alchemyTableCtrl($scope,intersectService,elementService) {
         });
 
     });
-    $scope.$on("UNS-ELM-DROPPED", function (event,element) {
+    $scope.$on("UNS-ELM-LONGTOUCH", function (event,element) {
         console.log("splitting: "+element.name);
 
     });

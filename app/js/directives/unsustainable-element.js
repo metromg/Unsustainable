@@ -12,14 +12,20 @@ function unsustainableElement() {
     directive.restrict = 'E';
     directive.scope = {
         elementData: '=',
-        touchDuration: '='
+        touchDuration: '=',
+        touchDurationUntilShake: '='
+
     };
     directive.link = function (scope, element, attributes) {
-        scope.elementData.position = scope.elementData.position || {'x':100,'y':100};
+
+        scope.elementData.position = scope.elementData.position || {'x': 100, 'y': 100};
+        scope.elementClass = "";
 
         var mouseDown = false;
+        var timerUntilShake;
         var timer;
         var touchDuration = scope.touchDuration || 1200;
+        var touchDurationUntilShake = scope.touchDurationUntilShake || 300;
 
         element.bind("touchstart", onTouchStart);
         element.bind("mousedown", onTouchStart);
@@ -33,25 +39,46 @@ function unsustainableElement() {
 
         function onTouchStart(e) {
             mouseDown = true;
-            //TODO make splitting possible
 
-            timer = setTimeout(onLongTouch, touchDuration);
+            timerUntilShake = setTimeout(startLongTouch,touchDurationUntilShake);
+
+        }
+
+        function startLongTouch() {
+            scope.$apply(function () {
+                scope.elementClass = "shake shake-horizontal shake-constant";
+            });
+
+                timer = setTimeout(onLongTouch, touchDuration);
+
+        }
+
+        function cancelLongTouch() {
+            scope.$apply(function () {
+                scope.elementClass = "";
+            });
+            if (timer)
+                clearTimeout(timer);
+            if (timerUntilShake)
+                clearTimeout(timerUntilShake);
+        }
+
+        function onLongTouch() {
+            cancelLongTouch();
+            scope.$emit("UNS-ELM-LONGTOUCH", scope.elementData);
         }
 
         function onTouchEnd(e) {
             mouseDown = false;
-            if (timer)
-                clearTimeout(timer);
-            scope.$emit("UNS-ELM-DROPPED",scope.elementData);
+            cancelLongTouch();
+            scope.$emit("UNS-ELM-DROPPED", scope.elementData);
 
         }
 
-        function onLongTouch () {
-            scope.$emit("UNS-ELM-LONGTOUCH",scope.elementData);
-        }
 
         function onMouseMove(e) {
             if (!mouseDown) return;
+            cancelLongTouch();
             scope.$apply(function () {
                 scope.elementData.position.x = e.clientX - element[0].clientWidth / 2;
                 scope.elementData.position.y = e.clientY - element[0].clientHeight / 2;
@@ -60,6 +87,7 @@ function unsustainableElement() {
 
         function onTouchMove(e) {
             if (!mouseDown) return;
+            cancelLongTouch();
             scope.$apply(function () {
                 scope.elementData.position.x = e.touches[0].clientX - element[0].clientWidth / 2;
                 scope.elementData.position.y = e.touches[0].clientY - element[0].clientWidth / 2;

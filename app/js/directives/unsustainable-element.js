@@ -108,6 +108,8 @@ function unsustainableElement() {
 
         function onTouchMove(e) {
             if (!mouseDown) return;
+            if (e.touches.length > 1) return;
+
             cancelLongTouch();
             scope.$apply(function () {
                 scope.elementData.position.x = e.touches[0].clientX;

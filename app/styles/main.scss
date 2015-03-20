@@ -56,3 +56,14 @@ html,body {
   float: left;
   background-color: $background--dark;
 }
+
+.uns-element-container,
+.uns-element-container img {
+  width: 3em;
+  height: 3em;
+}
+
+.uns-element-container {
+  text-align: center;
+  color: #404040;
+}

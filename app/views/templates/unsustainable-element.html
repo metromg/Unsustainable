@@ -1,5 +1,6 @@
 <div ng-style="{'position':'absolute','top':getPositionY() +'px', 'left':getPositionX() +'px'}" ng-class="elementClass">
-    <div ng-style="{'height':3+'em', 'width':3+'em','background-color':'green','border-radius':'50%'}">
+    <div class="uns-element-container">
+        <img draggable="false" ng-src="images/{{elementData.image}}" />
         {{elementData.name}}
     </div>
 </div>

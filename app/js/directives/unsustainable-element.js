@@ -29,11 +29,13 @@ function unsustainableElement() {
         element.bind("touchstart", onTouchStart);
         element.bind("mousedown", onTouchStart);
 
-        angular.element(document.body).bind("touchmove", onTouchMove);
-        angular.element(document.body).bind("mousemove", onMouseMove);
+        var bounds = document.getElementById("uns-alchemy-table");
 
-        angular.element(document.body).bind("touchend", onTouchEnd);
-        angular.element(document.body).bind("mouseup", onTouchEnd);
+        angular.element(bounds).bind("touchmove", onTouchMove);
+        angular.element(bounds).bind("mousemove", onMouseMove);
+
+        angular.element(bounds).bind("touchend", onTouchEnd);
+        angular.element(bounds).bind("mouseup", onTouchEnd);
 
         scope.getPositionX = function () {
             return scope.elementData.position.x - element[0].clientWidth / 2;
@@ -103,6 +105,7 @@ function unsustainableElement() {
             scope.$apply(function () {
                 scope.elementData.position.x = e.clientX;
                 scope.elementData.position.y = e.clientY;
+                resetPositionBounds();
             });
         }
 
@@ -114,7 +117,34 @@ function unsustainableElement() {
             scope.$apply(function () {
                 scope.elementData.position.x = e.touches[0].clientX;
                 scope.elementData.position.y = e.touches[0].clientY;
+                resetPositionBounds();
             });
+        }
+
+        function resetPositionBounds() {
+            // Top
+            var topBound = document.body.clientHeight - bounds.clientHeight;
+            if (scope.getPositionY() < topBound) {
+                scope.elementData.position.y = topBound + element[0].clientHeight / 2;
+            }
+
+            // Bottom
+            var bottomBound = document.body.clientHeight;
+            if (scope.getPositionY() + element[0].clientHeight > bottomBound) {
+                scope.elementData.position.y = bottomBound - element[0].clientHeight / 2;
+            }
+
+            // Left
+            var leftBound = document.body.clientWidth - bounds.clientWidth;
+            if (scope.getPositionX() < 0) {
+                scope.elementData.position.x = leftBound + element[0].clientWidth / 2;
+            }
+
+            // Right
+            var rightBound = document.body.clientWidth;
+            if (scope.getPositionX() + element[0].clientWidth > rightBound) {
+                scope.elementData.position.x = rightBound - element[0].clientWidth / 2;
+            }
         }
     };
 

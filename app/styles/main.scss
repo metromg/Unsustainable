@@ -36,7 +36,6 @@ html,body {
   height: 15%;
   background-color: #996633;
   opacity: 0.5;
-  position: relative;
 }
 
 .uns-alchemy-table {
@@ -44,10 +43,22 @@ html,body {
   width: 100%;
 }
 
+.uns-energy-container {
+  width: 80%;
+  height: 100%;
+  float: left;
+  position: relative;
+}
+
+.uns-navigation-buttons {
+  height: 100%;
+  width: 20%;
+  float: left;
+}
+
 .uns-energy-bar {
   height: 50%;
-  width: 75%;
-  float: left;
+  width: 95%;
 
   position: absolute;
   top: 0;
@@ -56,15 +67,13 @@ html,body {
 }
 
 .uns-energy-bar > div {
-  position: relative;
   height: 100%;
   background-color: $blue;
 }
 
-.uns-navigation-buttons {
-  height: 100%;
-  width: 20%;
-  float: left;
+.uns-energy-bar,
+.uns-energy-bar > div {
+  border-radius: 1em;
 }
 
 .uns-element-container,

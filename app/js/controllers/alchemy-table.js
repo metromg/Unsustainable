@@ -10,8 +10,6 @@ var controllersModule = require('./_index');
 function alchemyTableCtrl($scope, intersectService, elementService) {
     // ViewModel
     var vm = this;
-    vm.energyClass = "";
-
     elementService.gettingAllElements().then(function (data) {
         vm.elements = data.elements;
         vm.energy = data.energy;
@@ -51,15 +49,6 @@ function alchemyTableCtrl($scope, intersectService, elementService) {
         }, function (err) {
             console.log("Well shit! That's not a splittable element.");
         });
-    });
-
-    $scope.$watchCollection('vm.energy', function () {
-        vm.energyClass = "shake shake-constant";
-        setTimeout(function () {
-            $scope.$apply(function () {
-                vm.energyClass = "";
-            });
-        }, 200);
     });
 }
 

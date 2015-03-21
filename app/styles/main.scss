@@ -24,37 +24,47 @@ html,body {
   width: 100%;
   position: absolute;
   overflow: hidden;
+  background: url("../images/wood-background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
 
 .uns-alchemy-nav {
   width: 100%;
   height: 15%;
-  background-color: $green;
+  background-color: #996633;
+  opacity: 0.5;
+  position: relative;
 }
 
 .uns-alchemy-table {
   height: 85%;
   width: 100%;
-  background-color: $blue;
 }
 
 .uns-energy-bar {
-  height: 100%;
-  width: 80%;
+  height: 50%;
+  width: 75%;
   float: left;
-  background-color: $red;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 2.5%;
 }
 
 .uns-energy-bar > div {
+  position: relative;
   height: 100%;
-  background-color: $green;
+  background-color: $blue;
 }
 
 .uns-navigation-buttons {
   height: 100%;
   width: 20%;
   float: left;
-  background-color: $background--dark;
 }
 
 .uns-element-container,
@@ -65,5 +75,5 @@ html,body {
 
 .uns-element-container {
   text-align: center;
-  color: #404040;
+  color: #ccc;
 }

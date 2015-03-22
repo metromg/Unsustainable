@@ -31,6 +31,35 @@ html,body {
   -o-background-size: cover;
 }
 
+.uns-btn {
+  display: inline-block;
+  height: 2em;
+  padding: 0.5em;
+  border-radius: 0.5em;
+  border: 1px solid #303030;
+  background: #ccc;
+  color: #303030;
+  line-height: 2em;
+  text-align: center;
+}
+
+.uns-btn-primary {
+  background: #6B4724;
+  color: #fafafa;
+  border-color: #303030;
+}
+
+.uns-btn-primary:active {
+  background: #4B3219;
+}
+
+.uns-btn-lg {
+  height: 4em;
+  padding: 1em 6em;
+  line-height: 4em;
+}
+
+/* Alchemy Table */
 .uns-alchemy-nav {
   width: 100%;
   height: 15%;
@@ -73,7 +102,7 @@ html,body {
 
 .uns-energy-bar,
 .uns-energy-bar > div {
-  border-radius: 1em;
+  border-radius: 0.5em;
 }
 
 .uns-element-container,
@@ -85,4 +114,24 @@ html,body {
 .uns-element-container {
   text-align: center;
   color: #ccc;
+}
+
+/* Game Over */
+.uns-gameover-background {
+  width: 100%;
+  height: 100%;
+  background: url("../images/backgrounds/game-over.jpg") no-repeat center center fixed;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}
+
+.uns-btn-gameover {
+  position: absolute;
+  width: 25%;
+  padding: 1em 10%;
+  top: 45%;
+  left: 27.5%;
+  font-size: 1.5em;
 }

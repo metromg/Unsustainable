@@ -12,6 +12,11 @@ function Routes($stateProvider, $locationProvider, $urlRouterProvider) {
             url: '/',
             controller: 'alchemyTableCtrl as vm',
             templateUrl: 'alchemy-table.html'
+        })
+        .state('gameOver', {
+            url: '/game-over',
+            controller: 'gameOverCtrl as vm',
+            templateUrl: 'game-over.html'
         });
 
     $urlRouterProvider.otherwise('/');

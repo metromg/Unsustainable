@@ -25,7 +25,7 @@ servicesModule.service('dummyDataService', function ($q, $timeout) {
                         }
                     ]}
                 ],
-                energy: 200
+                energy: 300
             };
         $timeout(function () {
           deferred.resolve(dummyData);

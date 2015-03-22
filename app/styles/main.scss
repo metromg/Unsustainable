@@ -31,34 +31,6 @@ html,body {
   -o-background-size: cover;
 }
 
-.uns-btn {
-  display: inline-block;
-  height: 2em;
-  padding: 0.5em;
-  border-radius: 0.5em;
-  border: 1px solid #303030;
-  background: #ccc;
-  color: #303030;
-  line-height: 2em;
-  text-align: center;
-}
-
-.uns-btn-primary {
-  background: #9900CC;
-  color: #fafafa;
-  border-color: #fafafa;
-}
-
-.uns-btn-primary:active {
-  background: #6B008F;
-}
-
-.uns-btn-lg {
-  height: 4em;
-  padding: 1em 6em;
-  line-height: 4em;
-}
-
 /* Alchemy Table */
 .uns-alchemy-nav {
   width: 100%;
@@ -97,7 +69,7 @@ html,body {
 
 .uns-energy-bar > div {
   height: 100%;
-  background-color: $blue;
+  background-color: $primary;
 }
 
 .uns-energy-bar,
@@ -129,9 +101,11 @@ html,body {
 
 .uns-btn-gameover {
   position: absolute;
-  width: 25%;
-  padding: 1% 10%;
+  width: 50%;
   top: 45%;
-  left: 27.5%;
-  font-size: 1.5em;
+  left: 25%;
+}
+
+.uns-btn-gameover img {
+  width: 100%;
 }

@@ -2,9 +2,12 @@
 
 var angular = require('angular');
 
-module.exports = angular.module('app.services', []);
+
+module.exports = angular.module('app.services', [])
+    .constant("AppSettings",require('../constants'));
 
 // Define the list of services here
-require('./intersect.js');
-require('./dummy-data.js');
-require('./element.js');
+require('./intersect-service');
+require('./dummy-data-service');
+require('./element-service');
+require('./sqlite-service')

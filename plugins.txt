@@ -1,2 +1,2 @@
 #Script for adding cordova plugins
-cordova add plugin
+cordova plugin add https://github.com/brodysoft/Cordova-SQLitePlugin

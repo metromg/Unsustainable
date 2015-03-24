@@ -31,6 +31,9 @@ angular.element(document).ready(function () {
 
     angular.module('app').run(require('./on_run'));
 
-    angular.bootstrap(document, ['app']);
+    document.addEventListener('deviceready', function () {
+        angular.bootstrap(document, ['app']);
+    },false);
+
 
 });

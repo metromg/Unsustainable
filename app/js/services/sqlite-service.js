@@ -29,7 +29,7 @@ servicesModule.service('sqliteService', function ($q, $timeout, $window, AppSett
                     $log.log("SQLData",res);
                     var result = [];
                     for(var i = 0; i<res.rows.length;i++){
-                        result.push(res.rows.item(i));
+                        result.push(angular.copy(res.rows.item(i)));
                     }
                     deferred.resolve(result);
                 }, function (err) {

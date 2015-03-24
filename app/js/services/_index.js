@@ -10,4 +10,5 @@ module.exports = angular.module('app.services', [])
 require('./intersect-service');
 require('./dummy-data-service');
 require('./element-service');
-require('./sqlite-service')
+require('./dbpopulate-service');
+require('./sqlite-service');

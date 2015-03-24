@@ -7,9 +7,16 @@ var controllersModule = require('./_index');
 /**
  * @ngInject
  */
-function alchemyTableCtrl($scope, intersectService, elementService) {
+function alchemyTableCtrl($scope, intersectService, elementService,dbPopulateService,$log) {
     // ViewModel
     var vm = this;
+
+    dbPopulateService.createTables();
+
+
+
+
+
     elementService.gettingAllElements().then(function (data) {
         vm.elements = data.elements;
         vm.energy = data.energy;

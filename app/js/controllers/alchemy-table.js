@@ -15,7 +15,7 @@ function alchemyTableCtrl($scope, intersectService, elementService, dbPopulateSe
         dbPopulateService.populateDatabase();
     });
 
-    elementService.gettingAllElements().then(function (data) {
+    elementService.getCurrentElements().then(function (data) {
         vm.elements = data.elements;
         vm.energy = data.energy;
     });

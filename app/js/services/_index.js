@@ -12,3 +12,4 @@ require('./dummy-data-service');
 require('./element-service');
 require('./dbpopulate-service');
 require('./sqlite-service');
+require('./data-service');

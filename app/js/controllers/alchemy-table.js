@@ -10,14 +10,8 @@ var controllersModule = require('./_index');
 function alchemyTableCtrl($scope, intersectService, elementService,dbPopulateService,$log) {
     // ViewModel
     var vm = this;
-
     dbPopulateService.createTables();
-
-
-
-
-
-    elementService.gettingAllElements().then(function (data) {
+    elementService.getCurrentElements().then(function (data) {
         vm.elements = data.elements;
         vm.energy = data.energy;
     });

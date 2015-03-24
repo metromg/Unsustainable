@@ -9,13 +9,15 @@ servicesModule.service('dbPopulateService', function ($q, $timeout, sqliteServic
     var service = {};
 
     service.createTables = function () {
-        $log.log("fkin")
         var query = require('./createquery.js').query();
         $log.log(query);
-        sqliteService.query(query, []);
-        sqliteService.query("INSERT INTO Element(Name,Description) VALUES ('Testelement2','bla')", []).then(function () {
-            sqliteService.query("SELECT * FROM Element", []).then($log.log, $log.error);
-        });
+        //sqliteService.query(query, []);
+        query = require('./insertquery.js').query();
+        //sqliteService.query(query, []);
+
+        //sqliteService.query("INSERT INTO Element(Name,Description) VALUES ('Testelement2','bla')", []).then(function () {
+        //    sqliteService.query("SELECT * FROM Element", []).then($log.log, $log.error);
+        //});
 
 
     };
@@ -37,6 +39,3 @@ servicesModule.service('dbPopulateService', function ($q, $timeout, sqliteServic
     return service;
 });
 
-/**
- * Created by elias on 24.03.15.
- */

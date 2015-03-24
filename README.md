@@ -7,6 +7,9 @@ Unsustainable is a project which features different elements which can be combin
 angularjs-gulp-browserify-boilerplate seed.
 [https://github.com/jakemmarsh/angularjs-gulp-browserify-boilerplate]
 
+css shake
+[https://github.com/elrumordelaluz/csshake]
+
 apache cordova
 [http://cordova.apache.org/]
 

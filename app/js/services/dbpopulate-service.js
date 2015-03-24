@@ -112,6 +112,8 @@ servicesModule.service('dbPopulateService', function ($q, sqliteService) {
     };
 
     service.populateDatabase = function () {
+        var deferred = $q.defer();
+
         var elements = [
             {'typeId': 1, 'name': 'Water', 'desc': '', 'image': 'water.png'},
             {'typeId': 2, 'name': 'Fire', 'desc': '', 'image': 'fire.png'},
@@ -189,25 +191,23 @@ servicesModule.service('dbPopulateService', function ($q, sqliteService) {
                     ");
                 });
 
-                return chain(queries);
+                chain(queries).then(function () {
+                    deferred.resolve();
+                });
+            } else {
+                deferred.resolve();
             }
         });
+
+        return deferred.promise;
     };
 
     function chain(queries) {
-        var deferred = $q.defer();
-
-        var promise = queries.reduce(function (previous, query) {
+        return queries.reduce(function (previous, query) {
             return previous.then(function () {
                 return sqliteService.query(query, []);
             });
         }, $q(function (resolve) { resolve()}));
-
-        promise.then(function () {
-            deferred.resolve();
-        });
-
-        return deferred.promise;
     }
 
     return service;

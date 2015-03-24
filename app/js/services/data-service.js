@@ -9,23 +9,17 @@ servicesModule.service('dataService', function ($q, $timeout, sqliteService, $lo
     var service = {};
 
     service.getCurrentElements = function () {
-
-        var parameters = [1]; //Player Id 1
         var query = "SELECT * FROM CurrentElement AS ce " +
             "JOIN Player AS p ON p.Id = ce.PlayerId " +
             "JOIN Element AS e ON e.Id = ce.ElementId " +
             "WHERE p.Id = 1" +
             ";";
-        $log.log(query, parameters);
-        $log.log("gettin current elements!");
-        return sqliteService.query(query, parameters);
 
+        return sqliteService.query(query, []);
     };
 
     service.getAllElements = function () {
-
         var query = "SELECT * FROM Elements ";
-
         return sqliteService.query(query);
     };
 

@@ -17,7 +17,7 @@ function unsustainableElement() {
     };
 
     directive.link = function (scope, element, attributes) {
-        scope.elementData.position = scope.elementData.position || {'x': 100, 'y': 100};
+        scope.elementData.Location = JSON.parse(scope.elementData.Location) || {'x': 100, 'y': 100};
         scope.elementClass = "";
 
         var mouseDown = false;
@@ -38,11 +38,11 @@ function unsustainableElement() {
         angular.element(bounds).bind("mouseup", onTouchEnd);
 
         scope.getPositionX = function () {
-            return scope.elementData.position.x - element[0].clientWidth / 2;
+            return scope.elementData.Location.x - element[0].clientWidth / 2;
         };
 
         scope.getPositionY = function () {
-            return scope.elementData.position.y - element[0].clientHeight / 2;
+            return scope.elementData.Location.y - element[0].clientHeight / 2;
         };
 
         function onTouchStart(e) {
@@ -103,8 +103,8 @@ function unsustainableElement() {
             if (!mouseDown) return;
             cancelLongTouch();
             scope.$apply(function () {
-                scope.elementData.position.x = e.clientX;
-                scope.elementData.position.y = e.clientY;
+                scope.elementData.Location.x = e.clientX;
+                scope.elementData.Location.y = e.clientY;
                 resetPositionBounds();
             });
         }
@@ -115,8 +115,8 @@ function unsustainableElement() {
 
             cancelLongTouch();
             scope.$apply(function () {
-                scope.elementData.position.x = e.touches[0].clientX;
-                scope.elementData.position.y = e.touches[0].clientY;
+                scope.elementData.Location.x = e.touches[0].clientX;
+                scope.elementData.Location.y = e.touches[0].clientY;
                 resetPositionBounds();
             });
         }
@@ -125,25 +125,25 @@ function unsustainableElement() {
             // Top
             var topBound = document.body.clientHeight - bounds.clientHeight;
             if (scope.getPositionY() < topBound) {
-                scope.elementData.position.y = topBound + element[0].clientHeight / 2;
+                scope.elementData.Location.y = topBound + element[0].clientHeight / 2;
             }
 
             // Bottom
             var bottomBound = document.body.clientHeight;
             if (scope.getPositionY() + element[0].clientHeight > bottomBound) {
-                scope.elementData.position.y = bottomBound - element[0].clientHeight / 2;
+                scope.elementData.Location.y = bottomBound - element[0].clientHeight / 2;
             }
 
             // Left
             var leftBound = document.body.clientWidth - bounds.clientWidth;
             if (scope.getPositionX() < 0) {
-                scope.elementData.position.x = leftBound + element[0].clientWidth / 2;
+                scope.elementData.Location.x = leftBound + element[0].clientWidth / 2;
             }
 
             // Right
             var rightBound = document.body.clientWidth;
             if (scope.getPositionX() + element[0].clientWidth > rightBound) {
-                scope.elementData.position.x = rightBound - element[0].clientWidth / 2;
+                scope.elementData.Location.x = rightBound - element[0].clientWidth / 2;
             }
         }
     };

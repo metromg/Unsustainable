@@ -12,22 +12,22 @@ function alchemyTableCtrl($scope, intersectService, elementService, dbPopulateSe
     var vm = this;
 
     dbPopulateService.createTables().then(function () {
-        dbPopulateService.populateDatabase();
-    });
-
-    elementService.getCurrentElements().then(function (data) {
-        vm.elements = data.elements;
-        vm.energy = data.energy;
+        dbPopulateService.populateDatabase().then(function () {
+            elementService.getCurrentElements().then(function (data) {
+                vm.elements = data;
+                vm.energy = data[0].currentEnergy;
+            });
+        });
     });
 
     //Combine Elements
     $scope.$on("UNS-ELM-DROPPED", function (event, element) {
         intersectService.getIntersectingElements(element, vm.elements).then(function (intersecting) {
-            console.log(element.name + " intersects with " + intersecting[0].name);
+            console.log(element.Name + " intersects with " + intersecting[0].Name);
 
             elementService.combineElements(element, intersecting[0]).then(function (combinedElements) {
-                combinedElements[0].position = element.position;
-                combinedElements[1].position = intersecting[0].position;
+                combinedElements[0].Location = element.Location;
+                combinedElements[1].Location = intersecting[0].Location;
 
                 vm.elements.splice(vm.elements.indexOf(element), 1);
                 vm.elements.splice(vm.elements.indexOf(intersecting[0]), 1);
@@ -35,7 +35,7 @@ function alchemyTableCtrl($scope, intersectService, elementService, dbPopulateSe
                 vm.elements.push(combinedElements[0]);
                 vm.elements.push(combinedElements[1]);
 
-                vm.energy -= combinedElements[0].recipes[0].energy;
+                vm.energy -= combinedElements[0].recipes[0].EnergyUsage;
             }, function (err) {
                 console.log("Well shit! That's not a valid combination.");
             })
@@ -44,13 +44,13 @@ function alchemyTableCtrl($scope, intersectService, elementService, dbPopulateSe
 
     //Split elements
     $scope.$on("UNS-ELM-LONGTOUCH", function (event, element) {
-        console.log("splitting: " + element.name);
+        console.log("splitting: " + element.Name);
         elementService.splitElement(element).then(function (data) {
-            data.splittedElement.position = element.position;
+            data.splittedElement.Location = element.Location;
             vm.elements.splice(vm.elements.indexOf(element), 1);
             vm.elements.push(data.splittedElement);
 
-            vm.energy -= data.energy;
+            vm.energy -= data.EnergyUsage;
         }, function (err) {
             console.log("Well shit! That's not a splittable element.");
         });

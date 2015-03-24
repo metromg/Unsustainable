@@ -27,7 +27,11 @@ servicesModule.service('sqliteService', function ($q, $timeout, $window, AppSett
         db.transaction(function (tx) {
             tx.executeSql(sql, preparedValues, function (db, res) {
                     $log.log("SQLData",res);
-                    deferred.resolve(res);
+                    var result = [];
+                    for(var i = 0; i<res.rows.length;i++){
+                        result.push(res.rows.item(i));
+                    }
+                    deferred.resolve(result);
                 }, function (err) {
                     $log.error("SQLError ",err);
                     deferred.reject(err);

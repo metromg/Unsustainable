@@ -5,7 +5,7 @@ var servicesModule = require('./_index.js');
 /**
  * @ngInject
  */
-servicesModule.service('sqliteService', function ($q, $timeout, $window, AppSettings,$log) {
+servicesModule.service('sqliteService', function ($q, $timeout, $window, AppSettings, $log) {
     var service = {};
     var db;
     if ($window.sqlitePlugin) {
@@ -18,7 +18,7 @@ servicesModule.service('sqliteService', function ($q, $timeout, $window, AppSett
             });
     }
     else {
-        db = $window.openDatabase(AppSettings.dbName, '1.0', '', 2 * 1024 * 1024);
+        db = $window.openDatabase(AppSettings.dbName, '1.0', 'Unsustainable Database', 2 * 1024 * 1024);
     }
 
     service.query = function (sql, preparedValues) {

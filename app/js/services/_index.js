@@ -8,4 +8,3 @@ module.exports = angular.module('app.services', []);
 require('./intersect.js');
 require('./dummy-data.js');
 require('./element.js');
-require('./unsustainable-util.js');

@@ -8,7 +8,7 @@ var servicesModule = require('./_index.js');
 /**
  * @ngInject
  */
-servicesModule.service('elementService', function ($q, $timeout, dummyDataService, unsustainableUtil) {
+servicesModule.service('elementService', function ($q, $timeout, dummyDataService) {
     var service = {};
 
     service.combineElements = function (element1, element2) {
@@ -24,7 +24,7 @@ servicesModule.service('elementService', function ($q, $timeout, dummyDataServic
                 });
 
                 if (combinations.length >= 1) {
-                    deferred.resolve([combinations[0], unsustainableUtil.clone(combinations[0])]);
+                    deferred.resolve([combinations[0], angular.copy(combinations[0])]);
                 } else {
                     deferred.reject();
                 }

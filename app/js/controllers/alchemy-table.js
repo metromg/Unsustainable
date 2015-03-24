@@ -15,7 +15,11 @@ function alchemyTableCtrl($scope, intersectService, elementService, dbPopulateSe
         dbPopulateService.populateDatabase().then(function () {
             elementService.getCurrentElements().then(function (data) {
                 vm.elements = data;
-                vm.energy = data[0].currentEnergy;
+                vm.energy = data[0].CurrentEnergy;
+
+                angular.forEach(vm.elements, function (element) {
+                    element.Location = JSON.parse(element.Location);
+                });
             });
         });
     });
@@ -35,7 +39,7 @@ function alchemyTableCtrl($scope, intersectService, elementService, dbPopulateSe
                 vm.elements.push(combinedElements[0]);
                 vm.elements.push(combinedElements[1]);
 
-                vm.energy -= combinedElements[0].recipes[0].EnergyUsage;
+                vm.energy -= combinedElements[0].EnergyUsage;
             }, function (err) {
                 console.log("Well shit! That's not a valid combination.");
             })
@@ -46,11 +50,11 @@ function alchemyTableCtrl($scope, intersectService, elementService, dbPopulateSe
     $scope.$on("UNS-ELM-LONGTOUCH", function (event, element) {
         console.log("splitting: " + element.Name);
         elementService.splitElement(element).then(function (data) {
-            data.splittedElement.Location = element.Location;
+            data.Location = element.Location;
             vm.elements.splice(vm.elements.indexOf(element), 1);
-            vm.elements.push(data.splittedElement);
+            vm.elements.push(data);
 
-            vm.energy -= data.EnergyUsage;
+            vm.energy -= data.EnergyUsage / 2;
         }, function (err) {
             console.log("Well shit! That's not a splittable element.");
         });

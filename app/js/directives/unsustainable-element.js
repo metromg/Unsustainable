@@ -17,7 +17,7 @@ function unsustainableElement() {
     };
 
     directive.link = function (scope, element, attributes) {
-        scope.elementData.Location = JSON.parse(scope.elementData.Location) || {'x': 100, 'y': 100};
+        scope.elementData.Location = scope.elementData.Location || {'x': 100, 'y': 100};
         scope.elementClass = "";
 
         var mouseDown = false;

@@ -14,9 +14,10 @@ servicesModule.service('elementService', function ($q, $timeout, dataService, $l
     service.combineElements = function (element1, element2) {
         var deferred = $q.defer();
         dataService.getCombinedElement(element1, element2).then(function (data) {
-            $log.log(data);
-            //TODO clone elemtent
-            deferred.resolve()
+            if (data.length != 1) {
+                deferred.reject();
+            }
+            deferred.resolve([data[0], angular.copy(data[0])]);
         }, deferred.reject);
 
         return deferred.promise;
@@ -25,8 +26,17 @@ servicesModule.service('elementService', function ($q, $timeout, dataService, $l
     service.splitElement = function (element) {
         var deferred = $q.defer();
         dataService.getElementParts(element).then(function (data) {
-            //TODO Select element to split
-            //deferred.resolve({splittedElement: result, energy: element.recipes[0].energy / 2});
+            if (data.length == 0) {
+                deferred.reject();
+            }
+
+            var min = 0;
+            var max = data.length - 1;
+
+            // Random number between min and max
+            var random = Math.floor(Math.random()*(max-min+1)+min);
+
+            deferred.resolve(data[random]);
             $log.log(data);
         }, deferred.reject);
 

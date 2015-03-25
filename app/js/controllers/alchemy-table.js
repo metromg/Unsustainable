@@ -11,8 +11,8 @@ function alchemyTableCtrl($scope, intersectService, elementService, dbPopulateSe
     // ViewModel
     var vm = this;
 
-    dbPopulateService.createTables().then(function () {
-        dbPopulateService.populateDatabase().then(function () {
+    dbPopulateService.constructModel().then(function () {
+        dbPopulateService.generateMasterData().then(function () {
             elementService.getCurrentElements().then(function (data) {
                 vm.elements = data;
                 vm.energy = data[0].CurrentEnergy;

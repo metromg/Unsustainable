@@ -42,6 +42,7 @@ servicesModule.service('dataService', function ($q, $timeout, sqliteService, $lo
         return sqliteService.query(query, parameters);
     };
 
+    // TODO: Use
     service.getBaseElements = function () {
         var parameters = [];
         var query = "SELECT * FROM Element AS e " +

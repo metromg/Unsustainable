@@ -8,8 +8,7 @@ module.exports = angular.module('app.services', [])
 
 // Define the list of services here
 require('./intersect-service');
-require('./dummy-data-service');
 require('./element-service');
-require('./dbpopulate-service');
-require('./sqlite-service');
+require('./db/dbpopulate-service');
+require('./db/sqlite-service');
 require('./data-service');

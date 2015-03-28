@@ -22,18 +22,18 @@ function unsustainableEnergyBar($state, dataService) {
                 return;
             }
 
-            dataService.updateCurrentEnergy(energy);
+            dataService.updateCurrentEnergy(energy).then(function () {
+                if (energy <= 0) {
+                    $state.go('gameOver');
+                }
 
-            if (energy <= 0) {
-                $state.go('gameOver');
-            }
-
-            scope.energyClass = "shake shake-constant";
-            setTimeout(function () {
-                scope.$apply(function () {
-                    scope.energyClass = "";
-                });
-            }, 200);
+                scope.energyClass = "shake shake-constant";
+                setTimeout(function () {
+                    scope.$apply(function () {
+                        scope.energyClass = "";
+                    });
+                }, 200);
+            });
         });
     };
 

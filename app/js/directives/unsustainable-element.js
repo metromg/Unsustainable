@@ -96,10 +96,10 @@ function unsustainableElement(elementService) {
             mouseDown = false;
             cancelLongTouch();
 
-            elementService.updateCurrentElement(scope.elementData);
-            scope.$emit("UNS-ELM-DROPPED", scope.elementData);
+            elementService.updateCurrentElement(scope.elementData).then(function () {
+                scope.$emit("UNS-ELM-DROPPED", scope.elementData);
+            });
         }
-
 
         function onMouseMove(e) {
             if (!mouseDown) return;

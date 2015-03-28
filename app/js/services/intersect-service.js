@@ -9,23 +9,25 @@ servicesModule.service('intersectService',function ($q, $timeout) {
     var service = {};
 
     service.getIntersectingElements = function (element, elements) {
-        var that = this;
-        var deferred = $q.defer();
-        var tolerance = 20;
-        var intersectingElements = [];
+        var defer = $q.defer();
         $timeout(function () {
+            var intersectingElements = [];
             for (var i = 0; i < elements.length; i++) {
-                if (element.$$hashKey != elements[i].$$hashKey)
-                    if (that.checkIntersection(element.Location, elements[i].Location, tolerance))
+                if (element.$$hashKey != elements[i].$$hashKey) {
+                    if (service.checkIntersection(element.Location, elements[i].Location, 20)) {
                         intersectingElements.push(elements[i]);
+                    }
+                }
             }
-            if (intersectingElements.length > 0)
-                deferred.resolve(intersectingElements);
-            else
-                deferred.reject();
+
+            if (intersectingElements.length > 0) {
+                defer.resolve(intersectingElements);
+            } else {
+                defer.reject();
+            }
         });
 
-        return deferred.promise;
+        return defer.promise;
     };
 
     service.checkIntersection = function (position1, position2, tolerance) {

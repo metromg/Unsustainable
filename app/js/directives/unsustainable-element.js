@@ -5,7 +5,7 @@ var directivesModule = require('./_index.js');
 /**
  * @ngInject
  */
-function unsustainableElement(elementService) {
+function unsustainableElement(elementService, intersectService) {
     var directive = {};
     directive.templateUrl = "templates/unsustainable-element.html";
     directive.replace = true;
@@ -21,6 +21,7 @@ function unsustainableElement(elementService) {
         scope.elementClass = "";
 
         var mouseDown = false;
+        var isLongTouch = false;
         var timerUntilShake;
         var timer;
         var touchDuration = scope.touchDuration || 1200;
@@ -61,12 +62,15 @@ function unsustainableElement(elementService) {
             });
 
             timer = setTimeout(onLongTouch, touchDuration);
+            isLongTouch = true;
         }
 
         function cancelLongTouch() {
             scope.$apply(function () {
                 scope.elementClass = "";
             });
+
+            isLongTouch = false;
 
             if (timer) {
                 clearTimeout(timer);
@@ -103,10 +107,17 @@ function unsustainableElement(elementService) {
 
         function onMouseMove(e) {
             if (!mouseDown) return;
+
+            // Long touch tolerance
+            var clientPosition = { x: e.clientX, y: e.clientY };
+            if (isLongTouch && intersectService.checkIntersection(scope.elementData.Location, clientPosition, 20)) {
+                return;
+            }
+
             cancelLongTouch();
             scope.$apply(function () {
-                scope.elementData.Location.x = e.clientX;
-                scope.elementData.Location.y = e.clientY;
+                scope.elementData.Location.x = clientPosition.x;
+                scope.elementData.Location.y = clientPosition.y;
                 resetPositionBounds();
             });
         }
@@ -115,10 +126,16 @@ function unsustainableElement(elementService) {
             if (!mouseDown) return;
             if (e.touches.length > 1) return;
 
+            // Long touch tolerance
+            var clientPosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            if (isLongTouch && intersectService.checkIntersection(scope.elementData.Location, clientPosition, 20)) {
+                return;
+            }
+
             cancelLongTouch();
             scope.$apply(function () {
-                scope.elementData.Location.x = e.touches[0].clientX;
-                scope.elementData.Location.y = e.touches[0].clientY;
+                scope.elementData.Location.x = clientPosition.x;
+                scope.elementData.Location.y = clientPosition.y;
                 resetPositionBounds();
             });
         }

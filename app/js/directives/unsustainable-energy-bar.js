@@ -5,7 +5,7 @@ var directivesModule = require('./_index.js');
 /**
  * @ngInject
  */
-function unsustainableEnergyBar($state) {
+function unsustainableEnergyBar($state, dataService) {
     var directive = {};
     directive.templateUrl = "templates/unsustainable-energy-bar.html";
     directive.replace = true;
@@ -18,6 +18,12 @@ function unsustainableEnergyBar($state) {
         scope.energyClass = "";
 
         scope.$watch('energy', function (energy) {
+            if (energy == null) {
+                return;
+            }
+
+            dataService.updateCurrentEnergy(energy);
+
             if (energy <= 0) {
                 $state.go('gameOver');
             }

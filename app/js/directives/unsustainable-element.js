@@ -5,7 +5,7 @@ var directivesModule = require('./_index.js');
 /**
  * @ngInject
  */
-function unsustainableElement() {
+function unsustainableElement(elementService) {
     var directive = {};
     directive.templateUrl = "templates/unsustainable-element.html";
     directive.replace = true;
@@ -95,6 +95,8 @@ function unsustainableElement() {
             console.log("Touchend");
             mouseDown = false;
             cancelLongTouch();
+
+            elementService.updateCurrentElement(scope.elementData);
             scope.$emit("UNS-ELM-DROPPED", scope.elementData);
         }
 

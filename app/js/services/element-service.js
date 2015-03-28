@@ -25,26 +25,44 @@ servicesModule.service('elementService', function ($q, $timeout, dataService, $l
 
     service.splitElement = function (element) {
         var deferred = $q.defer();
-        dataService.getElementParts(element).then(function (data) {
-            if (data.length == 0) {
-                deferred.reject();
+
+        dataService.isBaseElement(element).then(function (isBaseElement) {
+            var promise = null;
+            if (isBaseElement) {
+                promise = dataService.getBaseElements();
+            } else {
+                promise = dataService.getElementParts(element);
             }
 
-            var min = 0;
-            var max = data.length - 1;
+            promise.then(function (data) {
+                if (data.length == 0) {
+                    deferred.reject();
+                }
 
-            // Random number between min and max
-            var random = Math.floor(Math.random()*(max-min+1)+min);
+                var min = 0;
+                var max = data.length - 1;
 
-            deferred.resolve(data[random]);
-            $log.log(data);
-        }, deferred.reject);
+                // Random number between min and max
+                var random = Math.floor(Math.random()*(max-min+1)+min);
+
+                deferred.resolve(data[random]);
+                $log.log(data);
+            }, deferred.reject);
+        });
 
         return deferred.promise;
     };
 
     service.getCurrentElements = function () {
         return dataService.getCurrentElements();
+    };
+
+    service.updateCurrentElement = function (element) {
+        return dataService.updateCurrentElement(element);
+    };
+
+    service.restoreBaseElements = function () {
+        return dataService.restoreBaseElements();
     };
 
     return service;

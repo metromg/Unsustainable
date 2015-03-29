@@ -28,16 +28,18 @@ function unsustainableElement(elementService, intersectService) {
         var touchDuration = scope.touchDuration || 1200;
         var touchDurationUntilShake = scope.touchDurationUntilShake || 300;
 
-        element.bind("touchstart", onTouchStart);
-        element.bind("mousedown", onTouchStart);
-
         var bounds = document.getElementById("uns-alchemy-table");
 
-        angular.element(bounds).bind("touchmove", onTouchMove);
-        angular.element(bounds).bind("mousemove", onMouseMove);
-
-        angular.element(bounds).bind("touchend", onTouchEnd);
-        angular.element(bounds).bind("mouseup", onTouchEnd);
+        if (!!window.cordova) {
+            element.bind("touchstart", onTouchStart);
+            angular.element(bounds).bind("touchmove", onTouchMove);
+            angular.element(bounds).bind("touchend", onTouchEnd);
+        }
+        else {
+            element.bind("mousedown", onTouchStart);
+            angular.element(bounds).bind("mousemove", onMouseMove);
+            angular.element(bounds).bind("mouseup", onTouchEnd);
+        }
 
         scope.getPositionX = function () {
             return scope.elementData.Location.x - element[0].clientWidth / 2;

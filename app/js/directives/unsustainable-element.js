@@ -22,6 +22,7 @@ function unsustainableElement(elementService, intersectService) {
 
         var mouseDown = false;
         var isLongTouch = false;
+        var isMouseMoved = false;
         var timerUntilShake;
         var timer;
         var touchDuration = scope.touchDuration || 1200;
@@ -46,6 +47,7 @@ function unsustainableElement(elementService, intersectService) {
             return scope.elementData.Location.y - element[0].clientHeight / 2;
         };
 
+        var startPosition = angular.copy(scope.elementData.Location);
         function onTouchStart(e) {
             if (mouseDown) {
                 return;
@@ -53,10 +55,18 @@ function unsustainableElement(elementService, intersectService) {
 
             console.log("Touchstart");
             mouseDown = true;
+            startPosition = angular.copy(scope.elementData.Location);
+            isMouseMoved = false;
             timerUntilShake = setTimeout(startLongTouch,touchDurationUntilShake);
         }
 
         function startLongTouch() {
+            // If mouse was already moved before long touch starts
+            if (isMouseMoved) {
+                return;
+            }
+
+            console.log("Start long touch");
             scope.$apply(function () {
                 scope.elementClass = "shake shake-horizontal shake-constant";
             });
@@ -66,6 +76,7 @@ function unsustainableElement(elementService, intersectService) {
         }
 
         function cancelLongTouch() {
+            console.log("Cancel long touch");
             scope.$apply(function () {
                 scope.elementClass = "";
             });
@@ -82,6 +93,7 @@ function unsustainableElement(elementService, intersectService) {
         }
 
         function onLongTouch() {
+            console.log("Finish long touch");
             if (!mouseDown) {
                 return;
             }
@@ -98,6 +110,12 @@ function unsustainableElement(elementService, intersectService) {
 
             console.log("Touchend");
             mouseDown = false;
+
+            // If element is at start position
+            if (!isLongTouch && intersectService.checkIntersection(scope.elementData.Location, startPosition, 20)) {
+                console.log("Short tab");
+            }
+
             cancelLongTouch();
 
             elementService.updateCurrentElement(scope.elementData).then(function () {
@@ -114,12 +132,21 @@ function unsustainableElement(elementService, intersectService) {
                 return;
             }
 
-            cancelLongTouch();
             scope.$apply(function () {
                 scope.elementData.Location.x = clientPosition.x;
                 scope.elementData.Location.y = clientPosition.y;
                 resetPositionBounds();
             });
+
+            // Do not continue if element wasn't moved from its start position
+            if (intersectService.checkIntersection(scope.elementData.Location, startPosition, 20)) {
+                return;
+            }
+
+            isMouseMoved = true;
+            if (isLongTouch) {
+                cancelLongTouch();
+            }
         }
 
         function onTouchMove(e) {
@@ -132,12 +159,21 @@ function unsustainableElement(elementService, intersectService) {
                 return;
             }
 
-            cancelLongTouch();
             scope.$apply(function () {
                 scope.elementData.Location.x = clientPosition.x;
                 scope.elementData.Location.y = clientPosition.y;
                 resetPositionBounds();
             });
+
+            // Do not continue if element wasn't moved from its start position
+            if (intersectService.checkIntersection(scope.elementData.Location, startPosition, 0)) {
+                return;
+            }
+
+            isMouseMoved = true;
+            if (isLongTouch) {
+                cancelLongTouch();
+            }
         }
 
         function resetPositionBounds() {

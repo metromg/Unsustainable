@@ -114,8 +114,9 @@ function unsustainableElement(elementService, intersectService) {
             mouseDown = false;
 
             // If element is at start position
-            if (!isLongTouch && intersectService.checkIntersection(scope.elementData.Location, startPosition, 20)) {
+            if (!isLongTouch && !isMouseMoved && intersectService.checkIntersection(scope.elementData.Location, startPosition, 20)) {
                 console.log("Short tab");
+                scope.$root.$emit("UNS-ELM-SHORT-TAB", {elementData: scope.elementData, width: element[0].clientWidth});
             }
 
             cancelLongTouch();

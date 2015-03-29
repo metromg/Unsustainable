@@ -88,6 +88,31 @@ html,body {
   color: #ccc;
 }
 
+/* Flupp */
+.uns-flupp-container {
+  width: 12em;
+  min-height: 1em;
+  background: #5C3D1F;
+  opacity: 0.8;
+  border-radius: 0.5em;
+  color: #ccc;
+  padding: 1em;
+}
+
+.uns-flupp-recipes {
+  margin-top: 1em;
+  width: 100%;
+}
+
+.uns-flupp-recipe-ingredient {
+  width: 15%;
+  float: left;
+}
+
+.uns-flupp-recipe-ingredient img {
+  width: 100%;
+}
+
 /* Game Over */
 .uns-gameover-background {
   width: 100%;

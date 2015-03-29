@@ -1,3 +1,14 @@
-<div ng-show="show" style="width: 6em; height: 3em; background: red;"
+<div ng-show="show" class="uns-flupp-container"
      ng-style="{'position':'absolute','top':getPositionY() +'px', 'left':getPositionX() +'px'}">
+    <strong>{{elementData.Name}}</strong><br />
+    {{elementData.Description}}
+    <div class="uns-flupp-recipes">
+        <div ng-repeat="partial in elementParts" class="uns-flupp-recipe-ingredient">
+            <img ng-src="images/{{partial.Image}}" />
+        </div>
+        <div class="clearfix"></div>
+        <div ng-show="elementParts.length == 0">
+            Base element
+        </div>
+    </div>
 </div>

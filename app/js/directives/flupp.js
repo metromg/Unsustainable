@@ -5,7 +5,7 @@ var directivesModule = require('./_index.js');
 /**
  * @ngInject
  */
-function flupp($state, dataService) {
+function flupp(dataService) {
     var directive = {};
     directive.templateUrl = "templates/flupp.html";
     directive.replace = true;
@@ -16,6 +16,8 @@ function flupp($state, dataService) {
 
     directive.link = function (scope, element, attributes) {
         scope.show = false;
+        scope.elementParts = [];
+
         var shortTabData = null;
 
         scope.$root.$on("UNS-ELM-SHORT-TAB", function (event, data) {
@@ -32,7 +34,7 @@ function flupp($state, dataService) {
                 return;
             }
 
-            return scope.elementData.Location.x + (shortTabData.width / 2) + 10;
+            return scope.elementData.Location.x + (shortTabData.width / 2) + 15;
         };
 
         scope.getPositionY = function () {
@@ -42,6 +44,31 @@ function flupp($state, dataService) {
 
             return scope.elementData.Location.y - (shortTabData.width / 2);
         };
+
+        if (!!window.cordova) {
+            angular.element(document.body).bind("touchstart", onTouchStart);
+        } else {
+            angular.element(document.body).bind("mousedown", onTouchStart);
+        }
+
+        function onTouchStart() {
+            scope.$apply(function () {
+                if (scope.show) {
+                    scope.show = false;
+                }
+            });
+        }
+
+        scope.$watch('elementData', function (curr) {
+            if (curr == null) {
+                return;
+            }
+
+            console.log("Query new elementParts");
+            dataService.getElementParts(curr).then(function (data) {
+                scope.elementParts = data;
+            });
+        });
     };
 
     return directive;

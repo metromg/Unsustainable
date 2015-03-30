@@ -7,11 +7,16 @@ var controllersModule = require('./_index');
 /**
  * @ngInject
  */
-function gameOverCtrl($scope, intersectService, elementService) {
+function gameOverCtrl($scope, intersectService, elementService, dataService) {
     // ViewModel
     var vm = this;
+    vm.show = false;
 
-    //TODO: Reset current elements to basic elements in db
+    elementService.restoreBaseElements().then(function () {
+        return dataService.updateCurrentEnergy(300);
+    }).then(function () {
+        vm.show = true;
+    });
 }
 
 controllersModule.controller('gameOverCtrl', gameOverCtrl);

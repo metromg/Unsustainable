@@ -5,7 +5,7 @@ var directivesModule = require('./_index.js');
 /**
  * @ngInject
  */
-function unsustainableElement() {
+function unsustainableElement(elementService, intersectService) {
     var directive = {};
     directive.templateUrl = "templates/unsustainable-element.html";
     directive.replace = true;
@@ -21,21 +21,25 @@ function unsustainableElement() {
         scope.elementClass = "";
 
         var mouseDown = false;
+        var isLongTouch = false;
+        var isMouseMoved = false;
         var timerUntilShake;
         var timer;
         var touchDuration = scope.touchDuration || 1200;
         var touchDurationUntilShake = scope.touchDurationUntilShake || 300;
 
-        element.bind("touchstart", onTouchStart);
-        element.bind("mousedown", onTouchStart);
-
         var bounds = document.getElementById("uns-alchemy-table");
 
-        angular.element(bounds).bind("touchmove", onTouchMove);
-        angular.element(bounds).bind("mousemove", onMouseMove);
-
-        angular.element(bounds).bind("touchend", onTouchEnd);
-        angular.element(bounds).bind("mouseup", onTouchEnd);
+        if (!!window.cordova) {
+            element.bind("touchstart", onTouchStart);
+            angular.element(bounds).bind("touchmove", onTouchMove);
+            angular.element(bounds).bind("touchend", onTouchEnd);
+        }
+        else {
+            element.bind("mousedown", onTouchStart);
+            angular.element(bounds).bind("mousemove", onMouseMove);
+            angular.element(bounds).bind("mouseup", onTouchEnd);
+        }
 
         scope.getPositionX = function () {
             return scope.elementData.Location.x - element[0].clientWidth / 2;
@@ -45,6 +49,7 @@ function unsustainableElement() {
             return scope.elementData.Location.y - element[0].clientHeight / 2;
         };
 
+        var startPosition = angular.copy(scope.elementData.Location);
         function onTouchStart(e) {
             if (mouseDown) {
                 return;
@@ -52,21 +57,33 @@ function unsustainableElement() {
 
             console.log("Touchstart");
             mouseDown = true;
+            startPosition = angular.copy(scope.elementData.Location);
+            isMouseMoved = false;
             timerUntilShake = setTimeout(startLongTouch,touchDurationUntilShake);
         }
 
         function startLongTouch() {
+            // If mouse was already moved before long touch starts
+            if (isMouseMoved) {
+                return;
+            }
+
+            console.log("Start long touch");
             scope.$apply(function () {
                 scope.elementClass = "shake shake-horizontal shake-constant";
             });
 
             timer = setTimeout(onLongTouch, touchDuration);
+            isLongTouch = true;
         }
 
         function cancelLongTouch() {
+            console.log("Cancel long touch");
             scope.$apply(function () {
                 scope.elementClass = "";
             });
+
+            isLongTouch = false;
 
             if (timer) {
                 clearTimeout(timer);
@@ -78,6 +95,7 @@ function unsustainableElement() {
         }
 
         function onLongTouch() {
+            console.log("Finish long touch");
             if (!mouseDown) {
                 return;
             }
@@ -94,31 +112,71 @@ function unsustainableElement() {
 
             console.log("Touchend");
             mouseDown = false;
-            cancelLongTouch();
-            scope.$emit("UNS-ELM-DROPPED", scope.elementData);
-        }
 
+            // If element is at start position
+            if (!isLongTouch && !isMouseMoved && intersectService.checkIntersection(scope.elementData.Location, startPosition, 20)) {
+                console.log("Short tab");
+                scope.$root.$emit("UNS-ELM-SHORT-TAB", {elementData: scope.elementData, width: element[0].clientWidth});
+            }
+
+            cancelLongTouch();
+
+            elementService.updateCurrentElement(scope.elementData).then(function () {
+                scope.$emit("UNS-ELM-DROPPED", scope.elementData);
+            });
+        }
 
         function onMouseMove(e) {
             if (!mouseDown) return;
-            cancelLongTouch();
+
+            // Long touch tolerance
+            var clientPosition = { x: e.clientX, y: e.clientY };
+            if (isLongTouch && intersectService.checkIntersection(scope.elementData.Location, clientPosition, 20)) {
+                return;
+            }
+
             scope.$apply(function () {
-                scope.elementData.Location.x = e.clientX;
-                scope.elementData.Location.y = e.clientY;
+                scope.elementData.Location.x = clientPosition.x;
+                scope.elementData.Location.y = clientPosition.y;
                 resetPositionBounds();
             });
+
+            // Do not continue if element wasn't moved from its start position
+            if (intersectService.checkIntersection(scope.elementData.Location, startPosition, 20)) {
+                return;
+            }
+
+            isMouseMoved = true;
+            if (isLongTouch) {
+                cancelLongTouch();
+            }
         }
 
         function onTouchMove(e) {
             if (!mouseDown) return;
             if (e.touches.length > 1) return;
 
-            cancelLongTouch();
+            // Long touch tolerance
+            var clientPosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+            if (isLongTouch && intersectService.checkIntersection(scope.elementData.Location, clientPosition, 20)) {
+                return;
+            }
+
             scope.$apply(function () {
-                scope.elementData.Location.x = e.touches[0].clientX;
-                scope.elementData.Location.y = e.touches[0].clientY;
+                scope.elementData.Location.x = clientPosition.x;
+                scope.elementData.Location.y = clientPosition.y;
                 resetPositionBounds();
             });
+
+            // Do not continue if element wasn't moved from its start position
+            if (intersectService.checkIntersection(scope.elementData.Location, startPosition, 0)) {
+                return;
+            }
+
+            isMouseMoved = true;
+            if (isLongTouch) {
+                cancelLongTouch();
+            }
         }
 
         function resetPositionBounds() {

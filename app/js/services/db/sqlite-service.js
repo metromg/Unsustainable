@@ -43,6 +43,14 @@ servicesModule.service('sqliteService', function ($q, $timeout, $window, AppSett
         return deferred.promise;
     };
 
+    service.chain = function (queries) {
+        return queries.reduce(function (previous, query) {
+            return previous.then(function () {
+                return service.query(query, []);
+            });
+        }, $q(function (resolve) { resolve()}));
+    };
+
     return service;
 });
 

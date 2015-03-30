@@ -5,7 +5,7 @@ var directivesModule = require('./_index.js');
 /**
  * @ngInject
  */
-function unsustainableEnergyBar($state) {
+function unsustainableEnergyBar($state, dataService) {
     var directive = {};
     directive.templateUrl = "templates/unsustainable-energy-bar.html";
     directive.replace = true;
@@ -18,16 +18,22 @@ function unsustainableEnergyBar($state) {
         scope.energyClass = "";
 
         scope.$watch('energy', function (energy) {
-            if (energy <= 0) {
-                $state.go('gameOver');
+            if (energy == null) {
+                return;
             }
 
-            scope.energyClass = "shake shake-constant";
-            setTimeout(function () {
-                scope.$apply(function () {
-                    scope.energyClass = "";
-                });
-            }, 200);
+            dataService.updateCurrentEnergy(energy).then(function () {
+                if (energy <= 0) {
+                    $state.go('gameOver');
+                }
+
+                scope.energyClass = "shake shake-constant";
+                setTimeout(function () {
+                    scope.$apply(function () {
+                        scope.energyClass = "";
+                    });
+                }, 200);
+            });
         });
     };
 

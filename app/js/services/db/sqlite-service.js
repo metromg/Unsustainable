@@ -32,7 +32,7 @@ servicesModule.service('sqliteService', function ($q, $timeout, $window, AppSett
                         result.push(angular.copy(res.rows.item(i)));
                     }
                     deferred.resolve(result);
-                }, function (err) {
+                }, function (tx, err) {
                     $log.error("SQLError ",err);
                     deferred.reject(err);
                 }

@@ -146,3 +146,43 @@ html,body {
 .uns-btn-gameover img {
   width: 100%;
 }
+
+
+/* List  */
+.uns-list-container {
+  height: 90%;
+
+}
+
+.uns-list-square-element {
+  padding: 2em;
+  text-align: center;
+  margin:1em;
+  height: 2em;
+  width:2em;
+  display: inline;
+  list-style-type: none;
+  float:left;
+  background-color: $red;
+  border-radius: 25%;
+
+}
+
+/*Element List */
+.uns-detail-view {
+  background-color: $green;
+  height: 90%;
+  margin: 2rem;
+  display: inline;
+}
+
+.uns-detail-view .uns-detail-view-left{
+  width: 60%;
+  height: 100%;
+  background-color: $blue;
+}
+.uns-detail-view .uns-detail-view-right{
+  list-style-type: none;
+  height: 100%;
+  background-color: $red;
+}

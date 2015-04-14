@@ -20,7 +20,14 @@ servicesModule.service('dataService', function ($q, $timeout, sqliteService, $lo
 
     // TODO: Use
     service.getAllElements = function () {
-        var query = "SELECT * FROM Elements ";
+        var query = "SELECT * FROM Element ";
+        return sqliteService.query(query);
+    };
+
+    service.getUnlockedElements = function () {
+        var query = "SELECT e.Id, e.Name, e.Description, e.Image FROM Element AS e " +
+                "JOIN Recipe AS r ON r.ResultId = e.Id " +
+                "JOIN UnlockedRecipe AS ur ON r.Id = ur.RecipeId ";
         return sqliteService.query(query);
     };
 

@@ -57,6 +57,13 @@ servicesModule.service('elementService', function ($q, $timeout, dataService, $l
         return dataService.getCurrentElements();
     };
 
+    service.getUnlockedElements = function () {
+        //TODO: Change to get unlocked Elements
+        return dataService.getAllElements();
+    };
+
+
+
     service.updateCurrentElement = function (element) {
         return dataService.updateCurrentElement(element);
     };

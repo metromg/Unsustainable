@@ -13,6 +13,11 @@ function Routes($stateProvider, $locationProvider, $urlRouterProvider) {
             controller: 'alchemyTableCtrl as vm',
             templateUrl: 'alchemy-table.html'
         })
+        .state('elementList',{
+          url:'/element-list',
+            controller:'elementListCtrl as vm',
+            templateUrl:'element-list.html'
+        })
         .state('gameOver', {
             url: '/game-over',
             controller: 'gameOverCtrl as vm',

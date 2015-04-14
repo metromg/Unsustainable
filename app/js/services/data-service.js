@@ -58,6 +58,15 @@ servicesModule.service('dataService', function ($q, $timeout, sqliteService, $lo
         return sqliteService.query(query, parameters);
     };
 
+    service.getBaseElementsExcept = function (elementId) {
+        var parameters = [elementId];
+        var query = "SELECT e.Id, e.Name, e.Description, e.Image, r.EnergyUsage FROM Element AS e " +
+            "LEFT JOIN Recipe AS r ON r.ResultId = e.Id " +
+            "WHERE r.ResultId IS NULL AND e.Id != ?";
+
+        return sqliteService.query(query, parameters);
+    };
+
     service.isBaseElement = function (element) {
         var deferred = $q.defer();
 

@@ -29,7 +29,7 @@ servicesModule.service('elementService', function ($q, $timeout, dataService, $l
         dataService.isBaseElement(element).then(function (isBaseElement) {
             var promise = null;
             if (isBaseElement) {
-                promise = dataService.getBaseElements();
+                promise = dataService.getBaseElementsExcept(element.Id);
             } else {
                 promise = dataService.getElementParts(element);
             }

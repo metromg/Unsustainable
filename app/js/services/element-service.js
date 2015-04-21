@@ -17,6 +17,7 @@ servicesModule.service('elementService', function ($q, $timeout, dataService, $l
             if (data.length != 1) {
                 deferred.reject();
             }
+            dataService.unlockRecipe(data[0].RecipeId);
             deferred.resolve([data[0], angular.copy(data[0])]);
         }, deferred.reject);
 
@@ -25,6 +26,9 @@ servicesModule.service('elementService', function ($q, $timeout, dataService, $l
 
     service.splitElement = function (element) {
         var deferred = $q.defer();
+
+
+
 
         dataService.isBaseElement(element).then(function (isBaseElement) {
             var promise = null;
@@ -62,7 +66,9 @@ servicesModule.service('elementService', function ($q, $timeout, dataService, $l
         return dataService.getAllElements();
     };
 
-
+    service.getBaseElements= function () {
+        return dataService.getBaseElements();
+    };
 
     service.updateCurrentElement = function (element) {
         return dataService.updateCurrentElement(element);
@@ -70,6 +76,10 @@ servicesModule.service('elementService', function ($q, $timeout, dataService, $l
 
     service.restoreBaseElements = function () {
         return dataService.restoreBaseElements();
+    };
+
+    service.getElementParts = function (element) {
+        return dataService.getElementParts(element);
     };
 
     return service;

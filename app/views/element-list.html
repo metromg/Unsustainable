@@ -1,11 +1,34 @@
-
+<div class="uns-alchemy-nav">
+    hallo
+</div>
 <div class="uns-detail-view">
-        <div class="uns-list-container uns-detail-view-left">
+    <div class="uns-list-container  uns-detail-view-left">
 
-            <div ng-repeat="element in vm.unlockedElements"  class="uns-list-square-element">
-                <div>{{element.Name}}</div>
-            </div>
+        <div ng-click="vm.selected = element;" ng-repeat="element in vm.unlockedElements"
+             class="uns-list-square-element">
+
+            <div>{{element.Name}}</div>
+        </div>
 
     </div>
-    <div class="uns-detail-view-right"></div>
+    <div class="uns-detail-view-right">
+        <div class="uns-details">
+            <div class="uns-details-heading">
+                <img src="images/{{vm.selected.Image}}">
+                <div class="info">    <div>{{vm.selected.Name}}</div>
+                    <div ng-hide="vm.selected.isBaseElement"> Energy Usage: {{vm.selected.EnergyUsage}}</div>
+                </div>
+
+            </div>
+            <div class="clearfix"></div>
+
+            <p>{{vm.selected.Description}}</p>
+
+            <div ng-repeat="celement in vm.selectedChildren" class="uns-flupp-recipe-ingredient">
+                <img style="height: 2em;width: 2em" src="images/{{celement.Image}}">
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
 </div>

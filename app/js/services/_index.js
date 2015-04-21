@@ -12,3 +12,4 @@ require('./element-service');
 require('./db/dbpopulate-service');
 require('./db/sqlite-service');
 require('./data-service');
+require('./recipe-service');

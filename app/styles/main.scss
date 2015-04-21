@@ -150,7 +150,8 @@ html,body {
 
 /* List  */
 .uns-list-container {
-  height: 90%;
+  //height: 90%;
+  overflow:auto;
 
 }
 
@@ -170,19 +171,36 @@ html,body {
 
 /*Element List */
 .uns-detail-view {
-  background-color: $green;
-  height: 90%;
-  margin: 2rem;
-  display: inline;
+ margin:2.5%;
+ height: 75%;
+
 }
 
 .uns-detail-view .uns-detail-view-left{
   width: 60%;
   height: 100%;
   background-color: $blue;
+  float:left;
+
 }
 .uns-detail-view .uns-detail-view-right{
   list-style-type: none;
   height: 100%;
+  width:40%;
   background-color: $red;
+  float:left;
+
+
+}
+.uns-details{
+  margin: 1em;
+}
+.uns-details-heading{
+  float: left;
+}
+.uns-details-heading img{
+  float:left;
+}
+.uns-details-heading .info{
+  float:left;
 }

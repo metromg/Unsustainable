@@ -3,28 +3,28 @@
 </div>
 <div class="uns-detail-view">
     <div class="uns-list-container  uns-detail-view-left">
-
         <div ng-click="vm.selected = element;" ng-repeat="element in vm.unlockedElements"
              class="uns-list-square-element">
-
-            <div>{{element.Name}}</div>
+            <img src="images/{{element.Image}}" />
+            {{element.Name}}
         </div>
-
     </div>
+
     <div class="uns-detail-view-right">
         <div class="uns-details">
             <div class="uns-details-heading">
-                <img src="images/{{vm.selected.Image}}">
-                <div class="info">    <div>{{vm.selected.Name}}</div>
-                    <div ng-hide="vm.selected.isBaseElement"> Energy Usage: {{vm.selected.EnergyUsage}}</div>
+                <img src="images/{{vm.selected.Image}}" />
+                <div class="info">
+                    <div>{{vm.selected.Name}}</div>
+                    <div ng-hide="vm.selected.isBaseElement">Energy Usage: {{vm.selected.EnergyUsage}}</div>
+                    <div ng-show="vm.selected.isBaseElement">Base Element</div>
                 </div>
-
             </div>
             <div class="clearfix"></div>
 
             <p>{{vm.selected.Description}}</p>
 
-            <div ng-repeat="celement in vm.selectedChildren" class="uns-flupp-recipe-ingredient">
+            <div ng-repeat="celement in vm.selectedChildren" class="uns-detail-recipe-ingredient">
                 <img style="height: 2em;width: 2em" src="images/{{celement.Image}}">
             </div>
         </div>

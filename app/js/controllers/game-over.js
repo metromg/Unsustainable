@@ -1,6 +1,3 @@
-/**
- * Created by Michael on 22.03.2015.
- */
 'use strict';
 var controllersModule = require('./_index');
 

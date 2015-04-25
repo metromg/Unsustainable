@@ -1,6 +1,3 @@
-/**
- * Created by elias on 30.03.15.
- */
 'use strict';
 var controllersModule = require('./_index');
 
@@ -20,22 +17,18 @@ function elementListCtrl($scope, recipeService, elementService) {
 
     recipeService.getUnlockedRecipes().then(function (elements) {
         vm.unlockedElements = vm.unlockedElements.concat(elements);
-
-        console.log(vm.unlockedElements)
     });
 
     $scope.$watchCollection("vm.selected", function (newCollection) {
         vm.selectedChildren = [];
 
-        if ( newCollection && newCollection.isBaseElement != 1 && newCollection.Id)
+        if (newCollection && newCollection.isBaseElement != 1 && newCollection.Id) {
             elementService.getElementParts(newCollection).then(function (elements) {
                 console.log("tews",elements,newCollection.Id)
                 vm.selectedChildren = elements;
-            })
-
-    })
-
-
+            });
+        }
+    });
 }
 
 controllersModule.controller('elementListCtrl', elementListCtrl);

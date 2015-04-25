@@ -54,7 +54,21 @@ html,body {
 .uns-navigation-buttons {
   height: 100%;
   width: 20%;
-  float: left;
+  float: right;
+  position: relative;
+}
+
+.uns-navigation-buttons a {
+  display: block;
+  height: 70%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+}
+
+.uns-navigation-buttons a img {
+  height: 100%;
 }
 
 .uns-energy-bar {

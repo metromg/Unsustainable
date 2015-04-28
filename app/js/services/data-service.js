@@ -17,9 +17,7 @@ servicesModule.service('dataService', function ($q, $timeout, sqliteService, $lo
 
         return sqliteService.query(query, []);
     };
-
-
-    // TODO: Use
+    
     service.getAllElements = function () {
         var query = "SELECT * FROM Element ";
         return sqliteService.query(query);
@@ -76,6 +74,7 @@ servicesModule.service('dataService', function ($q, $timeout, sqliteService, $lo
 
         return deferred.promise;
     };
+
     service.getBaseElements = function () {
 
         var parameters = [];
@@ -131,7 +130,6 @@ servicesModule.service('dataService', function ($q, $timeout, sqliteService, $lo
 
         return sqliteService.query(query, parameters);
     };
-
 
     service.getUnlockedRecipes = function () {
         var parameters = [];

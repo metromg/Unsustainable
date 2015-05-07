@@ -10,7 +10,7 @@ function gameOverCtrl($scope, intersectService, elementService, dataService) {
     vm.show = false;
 
     elementService.restoreBaseElements().then(function () {
-        return dataService.updateCurrentEnergy(300);
+        return dataService.updateCurrentEnergy(1000);
     }).then(function () {
         vm.show = true;
     });

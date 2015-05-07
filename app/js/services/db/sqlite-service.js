@@ -37,7 +37,6 @@ servicesModule.service('sqliteService', function ($q, $timeout, $window, AppSett
                     deferred.reject(err);
                 }
             );
-
         });
 
         return deferred.promise;

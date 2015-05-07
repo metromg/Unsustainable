@@ -76,7 +76,6 @@ servicesModule.service('dataService', function ($q, $timeout, sqliteService, $lo
     };
 
     service.getBaseElements = function () {
-
         var parameters = [];
         var query = "SELECT e.Id,e.Name,e.Image,e.Description,1 as isBaseElement FROM Element AS e \
             LEFT JOIN Recipe AS r ON r.ResultId = e.Id\
@@ -84,8 +83,6 @@ servicesModule.service('dataService', function ($q, $timeout, sqliteService, $lo
         ";
 
         return sqliteService.query(query, parameters);
-
-
     };
 
     service.restoreBaseElements = function () {
@@ -138,28 +135,31 @@ servicesModule.service('dataService', function ($q, $timeout, sqliteService, $lo
         JOIN UnlockedRecipe AS ur ON ur.RecipeId = r.Id\
         JOIN Player AS p ON p.Id = ur.PlayerId";
 
-
         return sqliteService.query(query, parameters);
     };
 
     service.unlockRecipe = function (recipeId) {
         var deferred = $q.defer();
-        if (recipeId)
-
-            sqliteService.query("SELECT count(*) FROM UnlockedRecipe WHERE RecipeId = ?", [recipeId]).then(function (data) {
-
-                if (data != 1)
+        if (recipeId != null) {
+            sqliteService.query("SELECT count(*) AS count FROM UnlockedRecipe WHERE RecipeId = ?", [recipeId]).then(function (data) {
+                if (data[0].count >= 1) {
                     deferred.reject();
+                    return;
+                }
+
                 var query = "INSERT INTO UnlockedRecipe(RecipeId,PlayerId) VALUES (?,?) ";
                 console.log(recipeId);
                 sqliteService.query(query, [recipeId, 1]).then(deferred.resolve
                     , deferred.reject);
 
             }, deferred.reject);
-        else deferred.reject("Id cannot be null!");
+        }
+        else
+        {
+            deferred.reject("Id cannot be null!");
+        }
+
         return deferred.promise;
-
-
     };
 
     return service;

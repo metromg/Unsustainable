@@ -4,7 +4,6 @@
  * @ngInject
  */
 function Routes($stateProvider, $locationProvider, $urlRouterProvider) {
-
     $locationProvider.html5Mode(false);
 
     $stateProvider
@@ -25,7 +24,6 @@ function Routes($stateProvider, $locationProvider, $urlRouterProvider) {
         });
 
     $urlRouterProvider.otherwise('/');
-
 }
 
 module.exports = Routes;

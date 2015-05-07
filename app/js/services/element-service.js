@@ -27,9 +27,6 @@ servicesModule.service('elementService', function ($q, $timeout, dataService, $l
     service.splitElement = function (element) {
         var deferred = $q.defer();
 
-
-
-
         dataService.isBaseElement(element).then(function (isBaseElement) {
             var promise = null;
             if (isBaseElement) {
@@ -59,11 +56,6 @@ servicesModule.service('elementService', function ($q, $timeout, dataService, $l
 
     service.getCurrentElements = function () {
         return dataService.getCurrentElements();
-    };
-
-    service.getUnlockedElements = function () {
-        //TODO: Change to get unlocked Elements
-        return dataService.getAllElements();
     };
 
     service.getBaseElements= function () {

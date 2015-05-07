@@ -12,9 +12,6 @@ servicesModule.service('recipeService', function ($q, $timeout, dataService, $lo
        return dataService.getUnlockedRecipes();
     };
 
-
-
-
     return service;
 });
 

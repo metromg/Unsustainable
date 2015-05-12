@@ -38,7 +38,7 @@ exports.query = function () {
         INSERT INTO Element\
         (Id, Name, Description, Image)\
         VALUES\
-        (8, 'Intelligence', 'Intelligence describes the comprehention and thinking of something.', 'sample.png');\
+        (8, 'Intelligence', 'Intelligence describes the comprehention and thinking of something.', 'intelligence.png');\
         \
         INSERT INTO Element\
         (Id, Name, Description, Image)\
@@ -73,7 +73,7 @@ exports.query = function () {
         INSERT INTO Element\
         (Id, Name, Description, Image)\
         VALUES\
-        (15, 'Pressure', 'Pressure is the force applied perpendicular to the surface of an object.', 'sample.png');\
+        (15, 'Pressure', 'Pressure is the force applied perpendicular to the surface of an object.', 'pressure.png');\
         \
         INSERT INTO Element\
         (Id, Name, Description, Image)\
@@ -83,27 +83,27 @@ exports.query = function () {
         INSERT INTO Element\
         (Id, Name, Description, Image)\
         VALUES\
-        (17, 'Fish', 'Fishs are animals which can be fished.', 'sample.png');\
+        (17, 'Fish', 'Fishs are animals which can be fished.', 'fish.png');\
         \
         INSERT INTO Element\
         (Id, Name, Description, Image)\
         VALUES\
-        (18, 'Fish Stick', 'A baked or fried snack similar to french fries but made of fish.', 'sample.png');\
+        (18, 'Fish Stick', 'A baked or fried snack similar to french fries but made of fish.', 'fish-stick.png');\
         \
         INSERT INTO Element\
         (Id, Name, Description, Image)\
         VALUES\
-        (19, 'Weapon', 'A weapon is a device which kills people.', 'sample.png');\
+        (19, 'Weapon', 'A weapon is a device which kills people.', 'weapon.png');\
         \
         INSERT INTO Element\
         (Id, Name, Description, Image)\
         VALUES\
-        (20, 'Moscito', 'Small, flying, bloodsuckers.', 'sample.png');\
+        (20, 'Moscito', 'Small, flying, bloodsuckers.', 'moscito.png');\
         \
         INSERT INTO Element\
         (Id, Name, Description, Image)\
         VALUES\
-        (21, 'Death', 'The death is coming in the future for anybody.', 'sample.png');\
+        (21, 'Death', 'The death is coming in the future for anybody.', 'death.png');\
         \
         INSERT INTO Element\
         (Id, Name, Description, Image)\

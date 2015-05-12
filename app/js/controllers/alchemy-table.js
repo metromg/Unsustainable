@@ -4,14 +4,14 @@ var controllersModule = require('./_index');
 /**
  * @ngInject
  */
-function alchemyTableCtrl($scope, intersectService, elementService, dbPopulateService,$log) {
+function alchemyTableCtrl($scope, intersectService, elementService, dbPopulateService, achievementService, $log) {
     // ViewModel
     var vm = this;
 
     dbPopulateService.constructModel().then(function () {
         dbPopulateService.generateMasterData().then(function () {
             elementService.getCurrentElements().then(function (data) {
-                $log.log("alcemyTableCtrl",data);
+                $log.log("alcemyTableCtrl", data);
                 vm.elements = data;
                 vm.energy = data[0].CurrentEnergy;
 
@@ -43,6 +43,17 @@ function alchemyTableCtrl($scope, intersectService, elementService, dbPopulateSe
                 elementService.updateCurrentElement(combinedElements[1]);
 
                 vm.energy -= combinedElements[0].EnergyUsage;
+                //Check for new Achievements
+                achievementService.checkForAchievements().then(function (achievement) {
+
+                        console.log("Achievement Bitchezz!", achievement)
+                    }
+
+                    , function () {
+                        console.log("No Achievement for you!")
+                    });
+
+
             }, function (err) {
                 console.log("Well shit! That's not a valid combination.");
             })
@@ -66,6 +77,8 @@ function alchemyTableCtrl($scope, intersectService, elementService, dbPopulateSe
             console.log("Well shit! That's not a splittable element.");
         });
     });
+
+
 }
 
 controllersModule.controller('alchemyTableCtrl', alchemyTableCtrl);

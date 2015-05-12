@@ -162,6 +162,38 @@ servicesModule.service('dataService', function ($q, $timeout, sqliteService, $lo
         return deferred.promise;
     };
 
+    service.getUnlockedAchievements = function () {
+        var params = [1];
+        var query = "SELECT a.Id,a.Name,a.Description,a.Image,a.Query FROM Achievement AS a \
+            LEFT JOIN UnlockedAchievement AS ua ON ua.AchievementId = a.Id \
+            WHERE PlayerId = ?";
+
+        return sqliteService.query(query, params);
+    };
+
+    service.getLockedAchievements = function () {
+        var params = [];
+        var query = "SELECT a.Id,a.Name,a.Description,a.Image,a.Query FROM Achievement AS a \
+            LEFT JOIN UnlockedAchievement AS ua ON ua.AchievementId = a.Id \
+            WHERE PlayerId IS NULL";
+        return sqliteService.query(query, params);
+    };
+
+    service.unlockAchievement = function (achievementId) {
+        var params = [1, achievementId];
+        var query = "INSERT INTO UnlockedAchievement(PlayerId,AchievementId) VALUES(?,?)";
+
+        return sqliteService.query(query, params);
+    };
+
+    service.checkAchievement = function (query) {
+        var params = [];
+
+
+        return sqliteService.query(query, params);
+    };
+
+
     return service;
 });
 

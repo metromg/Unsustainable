@@ -304,5 +304,8 @@ exports.query = function () {
         (Id, PlayerId, ElementId, Location)\
         VALUES\
         (6, 1, 8, '{\"x\": 600, \"y\": 200}');\
+        \
+        \
+        INSERT INTO Achievement(Name,Description,Image,Query) VALUES ('First Combination','You combined your first elements.','sample.png','SELECT COUNT(*) AS isReached FROM UnlockedRecipe');\
     ";
 };

@@ -16,6 +16,7 @@ servicesModule.service('elementService', function ($q, $timeout, dataService, $l
         dataService.getCombinedElement(element1, element2).then(function (data) {
             if (data.length != 1) {
                 deferred.reject();
+                return;
             }
             dataService.unlockRecipe(data[0].RecipeId);
             deferred.resolve([data[0], angular.copy(data[0])]);

@@ -26,7 +26,7 @@ servicesModule.service('sqliteService', function ($q, $timeout, $window, AppSett
         var deferred = $q.defer();
         db.transaction(function (tx) {
             tx.executeSql(sql, preparedValues, function (db, res) {
-                    $log.log("SQLData",res);
+
                     var result = [];
                     for(var i = 0; i<res.rows.length;i++){
                         result.push(angular.copy(res.rows.item(i)));

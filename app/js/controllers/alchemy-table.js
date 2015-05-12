@@ -44,13 +44,13 @@ function alchemyTableCtrl($scope, intersectService, elementService, dbPopulateSe
 
                 vm.energy -= combinedElements[0].EnergyUsage;
                 //Check for new Achievements
-                achievementService.checkForAchievements().then(function (achievement) {
-
-                        console.log("Achievement Bitchezz!", achievement)
+                achievementService.checkForAchievements().then(function (achievements) {
+                        console.log("Achievment Unlocked!");
+                        vm.achievments = achievements;
                     }
 
                     , function () {
-                        console.log("No Achievement for you!")
+                        console.log("No Achievement for you!");
                     });
 
 

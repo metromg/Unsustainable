@@ -8,3 +8,4 @@ module.exports = angular.module('app.directives', []);
 require('./unsustainable-element.js');
 require('./unsustainable-energy-bar.js');
 require('./flupp.js');
+require('./achievement-overlay');

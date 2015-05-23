@@ -104,12 +104,12 @@ servicesModule.service('dataService', function ($q, $timeout, sqliteService, $lo
 
                 location.x = location.x + 100;
                 
-                if (i == 4) {
+                if (i == 3) {
                     location.y = 200;
                     location.x = 200;
                 }
                 
-                if (i == 5) {
+                if (i == 4) {
                     location.y = 200;
                     location.x = 300;
                 }

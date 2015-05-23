@@ -113,42 +113,42 @@ exports.query = function () {
         INSERT INTO Element\
         (Id, Name, Description, Image)\
         VALUES\
-        (23, 'Human', 'You are a human, arent you?', 'sample.png');\
+        (23, 'Human', 'You are a human, arent you?', 'human.png');\
         \
         INSERT INTO Element\
         (Id, Name, Description, Image)\
         VALUES\
-        (24, 'Plant', 'A plant is living in a flowerpot and has dignity and rights.', 'sample.png');\
+        (24, 'Plant', 'A plant is living in a flowerpot and has dignity and rights.', 'plant.png');\
         \
         INSERT INTO Element\
         (Id, Name, Description, Image)\
         VALUES\
-        (25, 'King', 'The king is a normal human. But he has a crown on his head.', 'sample.png');\
+        (25, 'King', 'The king is a normal human. But he has a crown on his head.', 'king.png');\
         \
         INSERT INTO Element\
         (Id, Name, Description, Image)\
         VALUES\
-        (26, 'War', 'The state similarlly to peace, in which humans are killing them mutually.', 'sample.png');\
+        (26, 'War', 'The state similarlly to peace, in which humans are killing them mutually.', 'war.png');\
         \
         INSERT INTO Element\
         (Id, Name, Description, Image)\
         VALUES\
-        (27, 'Humans', 'Multiple humans.', 'sample.png');\
+        (27, 'Humans', 'Multiple humans.', 'humans.png');\
         \
         INSERT INTO Element\
         (Id, Name, Description, Image)\
         VALUES\
-        (28, 'Wheat', 'Wheat is a plant which grows on the ground... Like literally any other plant.', 'sample.png');\
+        (28, 'Wheat', 'Wheat is a plant which grows on the ground... Like literally any other plant.', 'wheat.png');\
         \
         INSERT INTO Element\
         (Id, Name, Description, Image)\
         VALUES\
-        (29, 'Tree', 'Tree are made of paper and are available in any paper-store.', 'sample.png');\
+        (29, 'Tree', 'Tree are made of paper and are available in any paper-store.', 'tree.png');\
         \
         INSERT INTO Element\
         (Id, Name, Description, Image)\
         VALUES\
-        (30, 'Zombie', 'Zombies are people who rose from death.', 'sample.png');\
+        (30, 'Zombie', 'Zombies are people who rose from death.', 'zombie.png');\
         \
         INSERT INTO Recipe\
         (Id, Element1Id, Element2Id, ResultId, EnergyUsage)\

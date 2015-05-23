@@ -92,8 +92,10 @@ servicesModule.service('dataService', function ($q, $timeout, sqliteService, $lo
             var queries = [];
             queries.push("DELETE FROM CurrentElement");
 
-            var location = {x: 100, y: 200};
-            angular.forEach(baseElements, function (element) {
+            var location = {x: 100, y: 100};            
+            for (var i = 0; i < baseElements.length; i++) {
+                var element = baseElements[i];
+                
                 queries.push("INSERT INTO CurrentElement\
                     (PlayerId, ElementId, Location)\
                     VALUES\
@@ -101,7 +103,17 @@ servicesModule.service('dataService', function ($q, $timeout, sqliteService, $lo
                 ");
 
                 location.x = location.x + 100;
-            });
+                
+                if (i == 4) {
+                    location.y = 200;
+                    location.x = 200;
+                }
+                
+                if (i == 5) {
+                    location.y = 200;
+                    location.x = 300;
+                }
+            }
 
             sqliteService.chain(queries).then(function () {
                 deferred.resolve();

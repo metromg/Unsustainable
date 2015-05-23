@@ -278,31 +278,31 @@ exports.query = function () {
         INSERT INTO CurrentElement\
         (Id, PlayerId, ElementId, Location)\
         VALUES\
-        (1, 1, 1, '{\"x\": 100, \"y\": 200}');\
+        (1, 1, 1, '{\"x\": 100, \"y\": 100}');\
         \
         INSERT INTO CurrentElement\
         (Id, PlayerId, ElementId, Location)\
         VALUES\
-        (2, 1, 2, '{\"x\": 200, \"y\": 200}');\
+        (2, 1, 2, '{\"x\": 200, \"y\": 100}');\
         \
         INSERT INTO CurrentElement\
         (Id, PlayerId, ElementId, Location)\
         VALUES\
-        (3, 1, 4, '{\"x\": 300, \"y\": 200}');\
+        (3, 1, 4, '{\"x\": 300, \"y\": 100}');\
         \
         INSERT INTO CurrentElement\
         (Id, PlayerId, ElementId, Location)\
         VALUES\
-        (4, 1, 5, '{\"x\": 400, \"y\": 200}');\
+        (4, 1, 5, '{\"x\": 400, \"y\": 100}');\
         \
         INSERT INTO CurrentElement\
         (Id, PlayerId, ElementId, Location)\
         VALUES\
-        (5, 1, 7, '{\"x\": 500, \"y\": 200}');\
+        (5, 1, 7, '{\"x\": 200, \"y\": 200}');\
         \
         INSERT INTO CurrentElement\
         (Id, PlayerId, ElementId, Location)\
         VALUES\
-        (6, 1, 8, '{\"x\": 600, \"y\": 200}');\
+        (6, 1, 8, '{\"x\": 300, \"y\": 200}');\
     ";
 };

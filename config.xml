@@ -13,7 +13,7 @@
     <preference name="Orientation" value="landscape" />
     <preference name="Fullscreen" value="true" />
 
-    <icon src="www/images/icons/icon.png" />
+    <icon src="www/images/icons/large-icon.png" />
 
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="5000" />
@@ -24,11 +24,11 @@
         <splash src="www/images/icons/splashscreen.png" density="land-xhdpi"/>
     </platform>
     <platform name="ios">
-		<icon src="www/images/icons/icon.png" height="57" widht="57" />
-		<icon src="www/images/icons/icon.png" height="72" widht="72" />
-		<icon src="www/images/icons/icon.png" height="76" widht="76" />
-		<icon src="www/images/icons/icon.png" height="120" widht="120" />
-		<icon src="www/images/icons/icon.png" height="152" widht="152" />
+		<icon src="www/images/icons/built/Icon-76.png" height="76" widht="76" />
+		<icon src="www/images/icons/built/Icon-76@2x.png" height="152" widht="152" />
+		<icon src="www/images/icons/built/Icon-40.png" height="40" widht="40" />
+		<icon src="www/images/icons/built/Icon-40@2x.png" height="80" widht="80" />
+		<icon src="www/images/icons/built/Icon-40@3x.png" height="120" widht="120" />
 
 		<splash src="www/images/icons/splashscreen.png" height="320" width="480"/>
 		<splash src="www/images/icons/splashscreen.png" height="640" width="960"/>

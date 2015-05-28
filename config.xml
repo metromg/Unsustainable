@@ -24,6 +24,22 @@
         <splash src="www/images/icons/splashscreen.png" density="land-xhdpi"/>
     </platform>
     <platform name="ios">
+		<icon src="www/images/icons/icon.png" height="57" widht="57" />
+		<icon src="www/images/icons/icon.png" height="72" widht="72" />
+		<icon src="www/images/icons/icon.png" height="76" widht="76" />
+		<icon src="www/images/icons/icon.png" height="120" widht="120" />
+		<icon src="www/images/icons/icon.png" height="152" widht="152" />
+
+		<splash src="www/images/icons/splashscreen.png" height="320" width="480"/>
+		<splash src="www/images/icons/splashscreen.png" height="640" width="960"/>
+		<splash src="www/images/icons/splashscreen.png" height="640" width="1136"/>
+        <splash src="www/images/icons/splashscreen.png" height="1024" width="768"/>
+        <splash src="www/images/icons/splashscreen.png" height="2048" width="1536"/>
+        <splash src="www/images/icons/splashscreen.png" height="2208" width="1242"/>
+ 
+		<splash src="www/images/icons/splashscreen.png" width="320" height="480"/>
+		<splash src="www/images/icons/splashscreen.png" width="640" height="960"/>
+		<splash src="www/images/icons/splashscreen.png" width="640" height="1136"/>
         <splash src="www/images/icons/splashscreen.png" width="1024" height="768"/>
         <splash src="www/images/icons/splashscreen.png" width="2048" height="1536"/>
         <splash src="www/images/icons/splashscreen.png" width="2208" height="1242"/>
